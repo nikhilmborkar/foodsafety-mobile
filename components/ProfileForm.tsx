@@ -187,6 +187,7 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
       </View>
 
       <Text style={styles.label}>Allergens — Block (Contains)</Text>
+      <Text style={styles.helperText}>Select allergens as labelled on EU food packaging</Text>
       <View style={styles.chipRow}>
         {EU14_ALLERGENS.map(a => (
           <TouchableOpacity
@@ -210,6 +211,7 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
       </View>
 
       <Text style={styles.label}>Allergens — Block (May Contain / PAL)</Text>
+      <Text style={styles.helperText}>Select allergens as labelled on EU food packaging</Text>
       <View style={styles.chipRow}>
         {EU14_ALLERGENS.map(a => (
           <TouchableOpacity
@@ -360,6 +362,11 @@ const styles = StyleSheet.create({
   chipTextActive: {
     color: '#FFFFFF',
     fontWeight: '600',
+  },
+  helperText: {
+    fontSize: 12,
+    color: '#718096',
+    marginBottom: 6,
   },
   toxinNote: {
     backgroundColor: '#FFFBEB',

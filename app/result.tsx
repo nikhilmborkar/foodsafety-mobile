@@ -6,6 +6,7 @@ import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,13 +17,15 @@ export default function ResultScreen() {
   const { data } = useLocalSearchParams<{ data: string }>();
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [profilesLoading, setProfilesLoading] = useState(true);
 
   useEffect(() => {
     AsyncStorage.getItem('household_profiles')
       .then(raw => {
         if (raw) setProfiles(JSON.parse(raw) as Profile[]);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setProfilesLoading(false));
   }, []);
 
   const handleScanAnother = () => router.replace('/');
@@ -75,13 +78,17 @@ export default function ResultScreen() {
           </View>
         )}
 
-        {result.evaluations.map(evaluation => (
-          <MemberCard
-            key={evaluation.Profile_ID}
-            profileName={getProfileName(evaluation.Profile_ID)}
-            evaluation={evaluation}
-          />
-        ))}
+        {profilesLoading ? (
+          <ActivityIndicator size="large" color="#2B6CB0" style={styles.spinner} />
+        ) : (
+          result.evaluations.map(evaluation => (
+            <MemberCard
+              key={evaluation.Profile_ID}
+              profileName={getProfileName(evaluation.Profile_ID)}
+              evaluation={evaluation}
+            />
+          ))
+        )}
 
         <TouchableOpacity style={styles.scanAgainBtn} onPress={handleScanAnother}>
           <Text style={styles.scanAgainText}>Scan another</Text>
@@ -128,6 +135,9 @@ const styles = StyleSheet.create({
     color: '#E53E3E',
     textAlign: 'center',
     margin: 24,
+  },
+  spinner: {
+    marginVertical: 24,
   },
   scanAgainBtn: {
     backgroundColor: '#2B6CB0',
