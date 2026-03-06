@@ -24,6 +24,8 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.nikhilborkar.foodsafetymobile"
@@ -31,6 +33,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "platforms": ["ios", "android"],
     "scheme": "foodsafety",
     "plugins": [
       "expo-router",
@@ -46,6 +49,12 @@
       "eas": {
         "projectId": "cc5e0293-220f-4db7-b94c-11ad1f7ce7c4"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/cc5e0293-220f-4db7-b94c-11ad1f7ce7c4"
     }
   }
 }
