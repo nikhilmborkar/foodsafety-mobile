@@ -1,0 +1,16 @@
+export const EU14_ALLERGENS = [
+  { id: 'gluten_cereals', label: 'Gluten (wheat, rye, barley, oats)' },
+  { id: 'crustaceans',    label: 'Crustaceans' },
+  { id: 'eggs',           label: 'Eggs' },
+  { id: 'fish',           label: 'Fish' },
+  { id: 'peanuts',        label: 'Peanuts' },
+  { id: 'soybeans',       label: 'Soybeans' },
+  { id: 'milk',           label: 'Milk / Dairy' },
+  { id: 'tree_nuts',      label: 'Tree nuts' },
+  { id: 'celery',         label: 'Celery' },
+  { id: 'mustard',        label: 'Mustard' },
+  { id: 'sesame',         label: 'Sesame' },
+  { id: 'sulphites',      label: 'Sulphites' },
+  { id: 'lupin',          label: 'Lupin' },
+  { id: 'molluscs',       label: 'Molluscs' },
+] as const;

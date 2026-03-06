@@ -1,0 +1,35 @@
+export interface Profile {
+  Profile_ID: string;
+  Profile_Name: string;
+  Profile_Type: 'Human' | 'Pet';
+  Pet_Species: 'Dog' | 'Cat' | 'N/A';
+  Age_Group: 'Baby/toddler' | 'Child' | 'Adult' | 'Pregnant/Breastfeeding';
+  Sensitivity_Level: 'Strict' | 'Normal';
+  Allergen_Framework: 'EU14';
+  Allergen_Token_Version: 'EU14_v1';
+  Allergy_Block_Contains: string;
+  Allergy_Block_PAL: string;
+  Diet_Preference: string;
+  Faith_Ruleset: string;
+  Faith_Evaluated: boolean;
+}
+
+export interface EvaluationOutput {
+  Profile_ID: string;
+  Outcome: 'BLOCK' | 'WARN' | 'ALLOW';
+  Output_State: string;
+  Confidence_Score: number;
+  Matched_Signals?: string[];
+  Message_Codes?: string[];
+}
+
+export interface EvaluateRequest {
+  barcode: string;
+  profiles: Profile[];
+}
+
+export interface EvaluateResponse {
+  product_id: string;
+  product_name: string;
+  evaluations: EvaluationOutput[];
+}

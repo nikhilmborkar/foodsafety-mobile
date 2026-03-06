@@ -21,10 +21,31 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.nikhilborkar.foodsafetymobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "scheme": "foodsafety",
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow FoodSafetyOS to scan barcodes."
+        }
+      ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cc5e0293-220f-4db7-b94c-11ad1f7ce7c4"
+      }
     }
   }
 }

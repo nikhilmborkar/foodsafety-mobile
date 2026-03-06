@@ -1,0 +1,10 @@
+export const COLOURS = {
+  BLOCK: '#E53E3E',
+  WARN: '#D69E2E',
+  ALLOW: '#38A169',
+  WHITE: '#FFFFFF',
+  BACKGROUND: '#F7FAFC',
+  TEXT_PRIMARY: '#1A202C',
+  TEXT_SECONDARY: '#718096',
+  BORDER: '#E2E8F0',
+} as const;
