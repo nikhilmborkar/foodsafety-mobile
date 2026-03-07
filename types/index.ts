@@ -3,7 +3,7 @@ export interface Profile {
   Profile_Name: string;
   Profile_Type: 'Human' | 'Pet';
   Pet_Species: 'Dog' | 'Cat' | 'N/A';
-  Age_Group: 'Baby/toddler' | 'Child' | 'Adult' | 'Pregnant/Breastfeeding';
+  Age_Group: 'Baby_0_12m' | 'Toddler_1_3y' | 'Child' | 'Teen' | 'Adult' | 'Senior' | 'Pregnant' | 'Breastfeeding';
   Sensitivity_Level: 'Strict' | 'Normal';
   Allergen_Framework: 'EU14';
   Allergen_Token_Version: 'EU14_v1';

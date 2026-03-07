@@ -16,12 +16,23 @@ interface Props {
   onCancel: () => void;
 }
 
-const AGE_GROUPS: Profile['Age_Group'][] = [
-  'Baby/toddler',
-  'Child',
-  'Adult',
-  'Pregnant/Breastfeeding',
+const AGE_GROUPS: { value: Profile['Age_Group']; label: string }[] = [
+  { value: 'Baby_0_12m',    label: 'Baby (0–12 months)' },
+  { value: 'Toddler_1_3y', label: 'Toddler (1–3 years)' },
+  { value: 'Child',         label: 'Child (4–12 years)' },
+  { value: 'Teen',          label: 'Teen (13–17 years)' },
+  { value: 'Adult',         label: 'Adult' },
+  { value: 'Senior',        label: 'Senior (65+)' },
+  { value: 'Pregnant',      label: 'Pregnant' },
+  { value: 'Breastfeeding', label: 'Breastfeeding' },
 ];
+
+const LIFE_STAGE_NOTES: Partial<Record<Profile['Age_Group'], string>> = {
+  Baby_0_12m:    '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  Toddler_1_3y:  '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  Pregnant:      '⚠️ Pregnancy safety rules apply — alcohol, raw fish, unpasteurised cheese, caffeine',
+  Breastfeeding: '⚠️ Breastfeeding rules apply — alcohol and caffeine flagged automatically',
+};
 const PET_SPECIES: Array<'Dog' | 'Cat'> = ['Dog', 'Cat'];
 const SENSITIVITY: Profile['Sensitivity_Level'][] = ['Normal', 'Strict'];
 const DIET_OPTIONS = ['None', 'Vegan', 'Vegetarian', 'Pescatarian'];
@@ -146,23 +157,30 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
         <>
           <Text style={styles.label}>Age Group</Text>
           <View style={styles.chipRow}>
-            {AGE_GROUPS.map(ag => (
+            {AGE_GROUPS.map(({ value, label }) => (
               <TouchableOpacity
-                key={ag}
-                style={[styles.chip, ageGroup === ag && styles.chipActive]}
-                onPress={() => setAgeGroup(ag)}
+                key={value}
+                style={[styles.chip, ageGroup === value && styles.chipActive]}
+                onPress={() => setAgeGroup(value)}
               >
                 <Text
                   style={[
                     styles.chipText,
-                    ageGroup === ag && styles.chipTextActive,
+                    ageGroup === value && styles.chipTextActive,
                   ]}
                 >
-                  {ag}
+                  {label}
                 </Text>
               </TouchableOpacity>
             ))}
           </View>
+          {LIFE_STAGE_NOTES[ageGroup] && (
+            <View style={styles.lifeStageNote}>
+              <Text style={styles.lifeStageNoteText}>
+                {LIFE_STAGE_NOTES[ageGroup]}
+              </Text>
+            </View>
+          )}
         </>
       )}
 
@@ -367,6 +385,19 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#718096',
     marginBottom: 6,
+  },
+  lifeStageNote: {
+    backgroundColor: '#EBF8FF',
+    borderRadius: 8,
+    padding: 12,
+    marginTop: 8,
+    borderLeftWidth: 3,
+    borderLeftColor: '#3182CE',
+  },
+  lifeStageNoteText: {
+    fontSize: 13,
+    color: '#1A365D',
+    lineHeight: 18,
   },
   toxinNote: {
     backgroundColor: '#FFFBEB',
