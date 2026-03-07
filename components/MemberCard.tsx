@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   outputState: {
-    fontSize: 13,
+    fontSize: 16,
     color: '#4A5568',
     marginTop: 4,
   },

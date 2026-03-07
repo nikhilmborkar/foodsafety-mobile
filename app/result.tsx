@@ -66,8 +66,16 @@ export default function ResultScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.productName}>{result.product_name}</Text>
-          <Text style={styles.productId}>{result.product_id}</Text>
+          <View style={styles.headerLeft}>
+            <Text style={styles.productName}>{result.product_name}</Text>
+            <Text style={styles.productId}>{result.product_id}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.settingsBtn}
+            onPress={() => router.push('/profiles')}
+          >
+            <Text style={styles.settingsIcon}>⚙</Text>
+          </TouchableOpacity>
         </View>
 
         {hasLowConfidence && (
@@ -107,7 +115,20 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     marginBottom: 16,
+  },
+  headerLeft: {
+    flex: 1,
+  },
+  settingsBtn: {
+    padding: 4,
+    marginLeft: 8,
+  },
+  settingsIcon: {
+    fontSize: 22,
+    color: '#718096',
   },
   productName: {
     fontSize: 22,
