@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { COLOURS } from '../constants/colours';
+import { TYPOGRAPHY } from '../constants/typography';
 import { EvaluationOutput } from '../types';
 
 // ─── Signal → consumer-facing explanation ────────────────────────────────────
@@ -412,6 +413,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   toggleLabel: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 13,
     fontWeight: '600',
     color: COLOURS.TEXT_MID,
@@ -428,6 +430,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   sectionLabel: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 11,
     fontWeight: '700',
     color: COLOURS.TEXT_SECONDARY,
@@ -436,6 +439,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   ruleItem: {
+    ...TYPOGRAPHY.body,
     fontSize: 13,
     color: COLOURS.TEXT_MID,
     lineHeight: 19,
@@ -459,12 +463,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   confidenceBadgeText: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 12,
     fontWeight: '700',
     color: COLOURS.WHITE,
     letterSpacing: 0.3,
   },
   confidenceNote: {
+    ...TYPOGRAPHY.body,
     fontSize: 12,
     color: COLOURS.TEXT_SECONDARY,
     flex: 1,

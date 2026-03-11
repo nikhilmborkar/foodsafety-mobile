@@ -5,6 +5,7 @@ import { EvaluationOutput } from '../types';
 import { OutcomeBadge } from './OutcomeBadge';
 import { WhyPanel } from './WhyPanel';
 import { API_BASE_URL } from '../constants/api';
+import { TYPOGRAPHY } from '../constants/typography';
 
 type FlagState = 'idle' | 'sending' | 'confirmed' | 'error';
 
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   avatarText: {
+    ...TYPOGRAPHY.heading,
     color: COLOURS.WHITE,
     fontWeight: '700',
     fontSize: 18,
@@ -132,12 +134,14 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   name: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 16,
     fontWeight: '600',
     color: COLOURS.TEXT_PRIMARY,
     marginBottom: 4,
   },
   outputState: {
+    ...TYPOGRAPHY.body,
     fontSize: 16,
     color: COLOURS.TEXT_MID,
     marginTop: 4,
@@ -149,10 +153,12 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   lowConfidenceText: {
+    ...TYPOGRAPHY.body,
     fontSize: 12,
     color: COLOURS.TEXT_SECONDARY,
   },
   disclaimer: {
+    ...TYPOGRAPHY.body,
     fontSize: 11,
     color: COLOURS.TEXT_FAINT,
     marginTop: 4,
@@ -172,14 +178,17 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   flagBtnText: {
+    ...TYPOGRAPHY.body,
     fontSize: 12,
     color: COLOURS.TEXT_SECONDARY,
   },
   flagConfirmed: {
+    ...TYPOGRAPHY.body,
     fontSize: 12,
     color: COLOURS.TEXT_SECONDARY,
   },
   flagError: {
+    ...TYPOGRAPHY.body,
     fontSize: 12,
     color: COLOURS.BLOCK,
     marginTop: 4,
