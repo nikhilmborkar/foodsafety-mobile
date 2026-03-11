@@ -123,6 +123,7 @@ const SIGNAL_EXPLANATIONS: Record<string, string> = {
   'diet.carmine':           'Contains carmine (insect-derived colorant).',
   'diet.casein':            'Contains casein or caseinate (dairy-derived).',
   'diet.whey':              'Contains whey (dairy-derived).',
+  'diet.animal_derivatives':'Contains an animal-derived ingredient (not from meat).',
 
   // ── Life-stage signals (life_stage.{signal}) ──────────────────────────────
   // Signal tokens are the exact CSV Match_Values for R600–R631.
