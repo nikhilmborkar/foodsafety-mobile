@@ -1,3 +1,5 @@
+export type UIOutcome = 'ALLOW' | 'WARN' | 'BLOCK' | 'INCONCLUSIVE';
+
 export interface Profile {
   Profile_ID: string;
   Profile_Name: string;

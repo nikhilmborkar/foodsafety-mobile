@@ -2,11 +2,19 @@ import { useState, useRef, useCallback } from 'react';
 import { API_BASE_URL } from '../constants/api';
 import { Profile, EvaluateResponse } from '../types';
 
+export interface InconclusiveResult {
+  inconclusive: true;
+  product_id: string;
+  product_name: string;
+}
+
+type EvaluateResult = EvaluateResponse | InconclusiveResult;
+
 interface EvaluateState {
   loading: boolean;
   slow: boolean;
   error: string | null;
-  result: EvaluateResponse | null;
+  result: EvaluateResult | null;
 }
 
 export function useEvaluate() {
@@ -21,7 +29,7 @@ export function useEvaluate() {
   const evaluate = useCallback(async (
     barcode: string,
     profiles: Profile[]
-  ): Promise<EvaluateResponse | null> => {
+  ): Promise<EvaluateResult | null> => {
     setState({ loading: true, slow: false, error: null, result: null });
 
     slowTimer.current = setTimeout(() => {
@@ -58,6 +66,17 @@ export function useEvaluate() {
       }
 
       const data = await response.json() as EvaluateResponse;
+
+      if (data.evaluations.length === 0) {
+        const inconclusive: InconclusiveResult = {
+          inconclusive: true,
+          product_id: data.product_id,
+          product_name: data.product_name,
+        };
+        setState({ loading: false, slow: false, error: null, result: inconclusive });
+        return inconclusive;
+      }
+
       setState({ loading: false, slow: false, error: null, result: data });
       return data;
     } catch {

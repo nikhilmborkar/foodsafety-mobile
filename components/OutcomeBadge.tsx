@@ -1,15 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { COLOURS } from '../constants/colours';
+import { TYPOGRAPHY } from '../constants/typography';
+import { UIOutcome } from '../types';
 
 interface Props {
-  outcome: 'BLOCK' | 'WARN' | 'ALLOW';
+  outcome: UIOutcome;
 }
 
-const BG: Record<string, string> = {
-  BLOCK: COLOURS.BLOCK,
-  WARN: COLOURS.WARN,
-  ALLOW: COLOURS.ALLOW,
+const BG: Record<UIOutcome, string> = {
+  BLOCK:         COLOURS.BLOCK,
+  WARN:          COLOURS.WARN,
+  ALLOW:         COLOURS.ALLOW,
+  INCONCLUSIVE:  COLOURS.INCONCLUSIVE,
 };
 
 export function OutcomeBadge({ outcome }: Props) {
@@ -28,6 +31,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   text: {
+    ...TYPOGRAPHY.subheading,
     color: COLOURS.WHITE,
     fontWeight: '700',
     fontSize: 13,

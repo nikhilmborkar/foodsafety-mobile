@@ -13,9 +13,10 @@ import {
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useFocusEffect, useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEvaluate } from '../hooks/useEvaluate';
-import { Profile } from '../types';
+import { useEvaluate, InconclusiveResult } from '../hooks/useEvaluate';
+import { Profile, EvaluateResponse } from '../types';
 import { COLOURS } from '../constants/colours';
+import { TYPOGRAPHY } from '../constants/typography';
 
 const CORNER_SIZE = 26;
 const CORNER_WIDTH = 3;
@@ -41,13 +42,29 @@ export default function ScanScreen() {
     }, [reset])
   );
 
+  function navigateResult(result: EvaluateResponse | InconclusiveResult) {
+    if ((result as InconclusiveResult).inconclusive) {
+      const r = result as InconclusiveResult;
+      router.push({
+        pathname: '/result',
+        params: {
+          state: 'INCONCLUSIVE',
+          product_id: r.product_id,
+          product_name: r.product_name,
+        },
+      });
+    } else {
+      router.push({ pathname: '/result', params: { data: JSON.stringify(result) } });
+    }
+  }
+
   const handleBarcode = useCallback(
     async ({ data }: { data: string }) => {
       if (scanLocked.current || profiles.length === 0) return;
       scanLocked.current = true;
       const result = await evaluate(data, profiles);
       if (result) {
-        router.push({ pathname: '/result', params: { data: JSON.stringify(result) } });
+        navigateResult(result);
       } else {
         scanLocked.current = false;
       }
@@ -63,7 +80,7 @@ export default function ScanScreen() {
     scanLocked.current = true;
     const result = await evaluate(code, profiles);
     if (result) {
-      router.push({ pathname: '/result', params: { data: JSON.stringify(result) } });
+      navigateResult(result);
     } else {
       scanLocked.current = false;
     }
@@ -220,6 +237,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bannerText: {
+    ...TYPOGRAPHY.bodyMedium,
     color: COLOURS.WHITE,
     fontSize: 15,
     fontWeight: '500',
@@ -270,6 +288,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   statusText: {
+    ...TYPOGRAPHY.body,
     color: COLOURS.WHITE,
     fontSize: 15,
     textAlign: 'center',
@@ -279,11 +298,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   errorText: {
+    ...TYPOGRAPHY.body,
     color: COLOURS.SCAN_ERROR,
     fontSize: 14,
     textAlign: 'center',
   },
   retryText: {
+    ...TYPOGRAPHY.bodyMedium,
     color: COLOURS.SCAN_INFO,
     fontSize: 14,
     fontWeight: '500',
@@ -296,6 +317,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   manualBtnText: {
+    ...TYPOGRAPHY.bodyMedium,
     color: COLOURS.WHITE,
     fontSize: 14,
     fontWeight: '500',
@@ -308,6 +330,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.BACKGROUND,
   },
   permissionText: {
+    ...TYPOGRAPHY.body,
     fontSize: 16,
     color: COLOURS.TEXT_MID,
     textAlign: 'center',
@@ -320,6 +343,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   permissionBtnText: {
+    ...TYPOGRAPHY.bodyMedium,
     color: COLOURS.WHITE,
     fontSize: 15,
     fontWeight: '600',
@@ -336,11 +360,13 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   manualTitle: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 18,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,
   },
   manualInput: {
+    ...TYPOGRAPHY.body,
     borderWidth: 1,
     borderColor: COLOURS.BORDER,
     borderRadius: 8,
@@ -363,6 +389,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   manualCancelText: {
+    ...TYPOGRAPHY.bodyMedium,
     fontSize: 15,
     color: COLOURS.TEXT_MID,
     fontWeight: '500',
@@ -378,6 +405,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.TEXT_FAINT,
   },
   manualSubmitText: {
+    ...TYPOGRAPHY.bodyMedium,
     fontSize: 15,
     color: COLOURS.WHITE,
     fontWeight: '600',

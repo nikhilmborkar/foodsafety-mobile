@@ -13,9 +13,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EvaluateResponse, Profile } from '../types';
 import { MemberCard } from '../components/MemberCard';
 import { COLOURS } from '../constants/colours';
+import { TYPOGRAPHY } from '../constants/typography';
+
+type ResultParams = {
+  data?: string;
+  state?: string;
+  product_id?: string;
+  product_name?: string;
+};
 
 export default function ResultScreen() {
-  const { data } = useLocalSearchParams<{ data: string }>();
+  const { data, state, product_id, product_name } = useLocalSearchParams<ResultParams>();
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [profilesLoading, setProfilesLoading] = useState(true);
@@ -30,6 +38,44 @@ export default function ResultScreen() {
   }, []);
 
   const handleScanAnother = () => router.replace('/');
+
+  if (state === 'INCONCLUSIVE') {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.content}>
+          {(product_name || product_id) && (
+            <View style={styles.header}>
+              <View style={styles.headerLeft}>
+                {product_name ? (
+                  <Text style={styles.productName}>{product_name}</Text>
+                ) : null}
+                {product_id ? (
+                  <Text style={styles.productId}>{product_id}</Text>
+                ) : null}
+              </View>
+            </View>
+          )}
+
+          <View style={styles.inconclusiveCard}>
+            <View style={styles.inconclusiveDiamond}>
+              <Text style={styles.inconclusiveDiamondText}>◆</Text>
+            </View>
+            <Text style={styles.inconclusiveHeadline}>Analysis incomplete</Text>
+            <Text style={styles.inconclusiveBody}>
+              We don't have enough ingredient data to complete this safety check.
+            </Text>
+          </View>
+
+          <TouchableOpacity style={styles.inconclusivePrimaryBtn} onPress={handleScanAnother}>
+            <Text style={styles.inconclusivePrimaryText}>Scan ingredient list</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.inconclusiveSecondaryBtn} onPress={handleScanAnother}>
+            <Text style={styles.inconclusiveSecondaryText}>Scan another product</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
   if (!data) {
     return (
@@ -133,11 +179,13 @@ const styles = StyleSheet.create({
     color: COLOURS.TEXT_SECONDARY,
   },
   productName: {
+    ...TYPOGRAPHY.heading,
     fontSize: 22,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,
   },
   productId: {
+    ...TYPOGRAPHY.body,
     fontSize: 13,
     color: COLOURS.TEXT_FAINT,
     marginTop: 2,
@@ -149,11 +197,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   lowConfidenceBannerText: {
+    ...TYPOGRAPHY.body,
     fontSize: 13,
     color: COLOURS.TEXT_SECONDARY,
     textAlign: 'center',
   },
   errorText: {
+    ...TYPOGRAPHY.body,
     fontSize: 16,
     color: COLOURS.BLOCK,
     textAlign: 'center',
@@ -170,8 +220,69 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   scanAgainText: {
+    ...TYPOGRAPHY.bodyMedium,
     color: COLOURS.WHITE,
     fontSize: 16,
     fontWeight: '600',
+  },
+  inconclusiveCard: {
+    alignItems: 'center',
+    backgroundColor: COLOURS.SURFACE,
+    borderRadius: 12,
+    padding: 32,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.07,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  inconclusiveDiamond: {
+    marginBottom: 16,
+  },
+  inconclusiveDiamondText: {
+    fontSize: 40,
+    color: COLOURS.INCONCLUSIVE,
+  },
+  inconclusiveHeadline: {
+    ...TYPOGRAPHY.heading,
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLOURS.TEXT_PRIMARY,
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  inconclusiveBody: {
+    ...TYPOGRAPHY.body,
+    fontSize: 15,
+    color: COLOURS.TEXT_MID,
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  inconclusivePrimaryBtn: {
+    backgroundColor: COLOURS.INCONCLUSIVE,
+    borderRadius: 10,
+    padding: 16,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  inconclusivePrimaryText: {
+    ...TYPOGRAPHY.bodyMedium,
+    color: COLOURS.WHITE,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  inconclusiveSecondaryBtn: {
+    borderRadius: 10,
+    padding: 16,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLOURS.BORDER_SUBTLE,
+  },
+  inconclusiveSecondaryText: {
+    ...TYPOGRAPHY.bodyMedium,
+    color: COLOURS.TEXT_MID,
+    fontSize: 16,
+    fontWeight: '500',
   },
 });

@@ -371,6 +371,10 @@ export function WhyPanel({ evaluation }: Props) {
               <Text style={styles.ruleItem}>
                 No known conflicts detected for this profile based on available data.
               </Text>
+            ) : (evaluation.Outcome as string) === 'INCONCLUSIVE' ? (
+              <Text style={styles.ruleItem}>
+                Not enough ingredient data was available to complete this check.
+              </Text>
             ) : (
               <Text style={styles.ruleItem}>
                 A safety concern was detected for this profile.

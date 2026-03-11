@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { COLOURS } from '../constants/colours';
-import { EvaluationOutput } from '../types';
+import { EvaluationOutput, UIOutcome } from '../types';
 import { OutcomeBadge } from './OutcomeBadge';
 import { WhyPanel } from './WhyPanel';
 import { API_BASE_URL } from '../constants/api';
@@ -15,21 +15,24 @@ interface Props {
   scanLogId?: number | null;
 }
 
-const BG: Record<string, string> = {
-  BLOCK: COLOURS.BLOCK,
-  WARN: COLOURS.WARN,
-  ALLOW: COLOURS.ALLOW,
+const BG: Record<UIOutcome, string> = {
+  BLOCK:        COLOURS.BLOCK,
+  WARN:         COLOURS.WARN,
+  ALLOW:        COLOURS.ALLOW,
+  INCONCLUSIVE: COLOURS.INCONCLUSIVE,
 };
 
-const VERDICT: Record<string, (name: string) => string> = {
-  ALLOW: (name) => `Checked for ${name} — no issues found`,
-  WARN:  (name) => `Checked for ${name} — review before giving`,
-  BLOCK: (name) => `Checked for ${name} — not suitable, avoid`,
+const VERDICT: Record<UIOutcome, (name: string) => string> = {
+  ALLOW:        (name) => `Checked for ${name} — no issues found`,
+  WARN:         (name) => `Checked for ${name} — review before giving`,
+  BLOCK:        (name) => `Checked for ${name} — not suitable, avoid`,
+  INCONCLUSIVE: (name) => `Checked for ${name} — analysis incomplete`,
 };
 
 export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
   const initial = profileName.charAt(0).toUpperCase();
-  const verdictText = (VERDICT[evaluation.Outcome] ?? VERDICT.ALLOW)(profileName);
+  const outcomeColour = BG[evaluation.Outcome] ?? COLOURS.INCONCLUSIVE;
+  const verdictText = (VERDICT[evaluation.Outcome] ?? VERDICT.INCONCLUSIVE)(profileName);
   const [flagState, setFlagState] = useState<FlagState>('idle');
 
   async function handleFlag() {
@@ -50,9 +53,9 @@ export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
   }
 
   return (
-    <View style={[styles.card, { borderLeftColor: BG[evaluation.Outcome] }]}>
+    <View style={[styles.card, { borderLeftColor: outcomeColour }]}>
       <View style={styles.row}>
-        <View style={[styles.avatar, { backgroundColor: BG[evaluation.Outcome] }]}>
+        <View style={[styles.avatar, { backgroundColor: outcomeColour }]}>
           <Text style={styles.avatarText}>{initial}</Text>
         </View>
         <View style={styles.info}>

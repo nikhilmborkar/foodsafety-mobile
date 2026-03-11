@@ -6,6 +6,7 @@ export const COLOURS = {
   ALLOW:          '#10B981',  // Emerald
   WARN:           '#F59E0B',  // Amber
   BLOCK:          '#E11D48',  // Rose Red
+  INCONCLUSIVE:   '#64748B',  // Slate
 
   // Backgrounds
   BACKGROUND:     '#FBFBFA',  // Alabaster
