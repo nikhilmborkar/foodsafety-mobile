@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { COLOURS } from '../constants/colours';
 import { EvaluationOutput } from '../types';
 import { OutcomeBadge } from './OutcomeBadge';
+import { WhyPanel } from './WhyPanel';
 
 interface Props {
   profileName: string;
@@ -15,11 +16,15 @@ const BG: Record<string, string> = {
   ALLOW: COLOURS.ALLOW,
 };
 
+const VERDICT: Record<string, (name: string) => string> = {
+  ALLOW: (name) => `Checked for ${name} — no issues found`,
+  WARN:  (name) => `Checked for ${name} — review before giving`,
+  BLOCK: (name) => `Checked for ${name} — not suitable, avoid`,
+};
+
 export function MemberCard({ profileName, evaluation }: Props) {
-  const [expanded, setExpanded] = useState(false);
   const initial = profileName.charAt(0).toUpperCase();
-  const showExpand =
-    evaluation.Outcome === 'BLOCK' || evaluation.Outcome === 'WARN';
+  const verdictText = (VERDICT[evaluation.Outcome] ?? VERDICT.ALLOW)(profileName);
 
   return (
     <View style={[styles.card, { borderLeftColor: BG[evaluation.Outcome] }]}>
@@ -30,38 +35,12 @@ export function MemberCard({ profileName, evaluation }: Props) {
         <View style={styles.info}>
           <Text style={styles.name}>{profileName}</Text>
           <OutcomeBadge outcome={evaluation.Outcome} />
-          <Text style={styles.outputState}>{evaluation.Output_State}</Text>
+          <Text style={styles.outputState}>{verdictText}</Text>
+          <Text style={styles.disclaimer}>Based on available product data and your household profiles. Always check the label.</Text>
         </View>
-        {showExpand && (
-          <TouchableOpacity
-            onPress={() => setExpanded(e => !e)}
-            style={styles.expandBtn}
-          >
-            <Text style={styles.expandText}>{expanded ? '▲' : '▼'}</Text>
-          </TouchableOpacity>
-        )}
       </View>
 
-      {expanded && showExpand && (
-        <View style={styles.expandedSection}>
-          {evaluation.Matched_Signals && evaluation.Matched_Signals.length > 0 && (
-            <View>
-              <Text style={styles.expandLabel}>Matched signals</Text>
-              {evaluation.Matched_Signals.map((s, i) => (
-                <Text key={i} style={styles.expandItem}>• {s}</Text>
-              ))}
-            </View>
-          )}
-          {evaluation.Message_Codes && evaluation.Message_Codes.length > 0 && (
-            <View style={styles.messageCodesBlock}>
-              <Text style={styles.expandLabel}>Message codes</Text>
-              {evaluation.Message_Codes.map((c, i) => (
-                <Text key={i} style={styles.expandItem}>• {c}</Text>
-              ))}
-            </View>
-          )}
-        </View>
-      )}
+      <WhyPanel evaluation={evaluation} />
 
       {evaluation.Confidence_Score < 50 && (
         <View style={styles.lowConfidence}>
@@ -119,36 +98,6 @@ const styles = StyleSheet.create({
     color: '#4A5568',
     marginTop: 4,
   },
-  expandBtn: {
-    padding: 4,
-    marginLeft: 8,
-  },
-  expandText: {
-    fontSize: 12,
-    color: '#718096',
-  },
-  expandedSection: {
-    marginTop: 12,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#E2E8F0',
-  },
-  expandLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#718096',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: 4,
-  },
-  expandItem: {
-    fontSize: 13,
-    color: '#4A5568',
-    marginBottom: 2,
-  },
-  messageCodesBlock: {
-    marginTop: 8,
-  },
   lowConfidence: {
     marginTop: 10,
     backgroundColor: '#EDF2F7',
@@ -158,5 +107,10 @@ const styles = StyleSheet.create({
   lowConfidenceText: {
     fontSize: 12,
     color: '#718096',
+  },
+  disclaimer: {
+    fontSize: 11,
+    color: '#A0AEC0',
+    marginTop: 4,
   },
 });
