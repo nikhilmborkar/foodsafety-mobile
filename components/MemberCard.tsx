@@ -1,13 +1,17 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { COLOURS } from '../constants/colours';
 import { EvaluationOutput } from '../types';
 import { OutcomeBadge } from './OutcomeBadge';
 import { WhyPanel } from './WhyPanel';
+import { API_BASE_URL } from '../constants/api';
+
+type FlagState = 'idle' | 'sending' | 'confirmed' | 'error';
 
 interface Props {
   profileName: string;
   evaluation: EvaluationOutput;
+  scanLogId?: number | null;
 }
 
 const BG: Record<string, string> = {
@@ -22,9 +26,27 @@ const VERDICT: Record<string, (name: string) => string> = {
   BLOCK: (name) => `Checked for ${name} — not suitable, avoid`,
 };
 
-export function MemberCard({ profileName, evaluation }: Props) {
+export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
   const initial = profileName.charAt(0).toUpperCase();
   const verdictText = (VERDICT[evaluation.Outcome] ?? VERDICT.ALLOW)(profileName);
+  const [flagState, setFlagState] = useState<FlagState>('idle');
+
+  async function handleFlag() {
+    if (!scanLogId || flagState === 'sending') return;
+    setFlagState('sending');
+    try {
+      const res = await fetch(`${API_BASE_URL}/scan-logs/${scanLogId}/flag`, {
+        method: 'POST',
+      });
+      if (res.ok) {
+        setFlagState('confirmed');
+      } else {
+        setFlagState('error');
+      }
+    } catch {
+      setFlagState('error');
+    }
+  }
 
   return (
     <View style={[styles.card, { borderLeftColor: BG[evaluation.Outcome] }]}>
@@ -41,6 +63,28 @@ export function MemberCard({ profileName, evaluation }: Props) {
       </View>
 
       <WhyPanel evaluation={evaluation} />
+
+      {scanLogId != null && (
+        <View style={styles.flagRow}>
+          {flagState === 'confirmed' ? (
+            <Text style={styles.flagConfirmed}>Thanks — we'll review this result.</Text>
+          ) : (
+            <>
+              <TouchableOpacity
+                style={[styles.flagBtn, flagState === 'sending' && styles.flagBtnDisabled]}
+                onPress={handleFlag}
+                disabled={flagState === 'sending'}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.flagBtnText}>Report incorrect result</Text>
+              </TouchableOpacity>
+              {flagState === 'error' && (
+                <Text style={styles.flagError}>Couldn't send report — try again.</Text>
+              )}
+            </>
+          )}
+        </View>
+      )}
 
       {evaluation.Confidence_Score < 50 && (
         <View style={styles.lowConfidence}>
@@ -111,6 +155,33 @@ const styles = StyleSheet.create({
   disclaimer: {
     fontSize: 11,
     color: '#A0AEC0',
+    marginTop: 4,
+  },
+  flagRow: {
+    marginTop: 10,
+  },
+  flagBtn: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#CBD5E0',
+  },
+  flagBtnDisabled: {
+    opacity: 0.5,
+  },
+  flagBtnText: {
+    fontSize: 12,
+    color: '#718096',
+  },
+  flagConfirmed: {
+    fontSize: 12,
+    color: '#718096',
+  },
+  flagError: {
+    fontSize: 12,
+    color: COLOURS.BLOCK,
     marginTop: 4,
   },
 });

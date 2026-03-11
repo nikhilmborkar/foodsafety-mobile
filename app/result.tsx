@@ -94,6 +94,7 @@ export default function ResultScreen() {
               key={evaluation.Profile_ID}
               profileName={getProfileName(evaluation.Profile_ID)}
               evaluation={evaluation}
+              scanLogId={result.scan_log_id ?? null}
             />
           ))
         )}

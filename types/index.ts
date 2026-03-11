@@ -19,6 +19,7 @@ export interface EvaluationOutput {
   Outcome: 'BLOCK' | 'WARN' | 'ALLOW';
   Output_State: string;
   Confidence_Score: number;
+  Matched_Rule_IDs?: string[];
   Matched_Signals?: string[];
   Message_Codes?: string[];
 }
@@ -31,5 +32,6 @@ export interface EvaluateRequest {
 export interface EvaluateResponse {
   product_id: string;
   product_name: string;
+  scan_log_id?: number | null;
   evaluations: EvaluationOutput[];
 }
