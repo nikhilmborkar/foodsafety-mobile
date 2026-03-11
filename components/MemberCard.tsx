@@ -99,12 +99,12 @@ export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOURS.SURFACE,
     borderRadius: 10,
     padding: 14,
     marginBottom: 12,
     borderLeftWidth: 4,
-    shadowColor: '#000',
+    shadowColor: '#000',               // shadow color — no semantic token
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
     shadowRadius: 3,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   avatarText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontWeight: '700',
     fontSize: 18,
   },
@@ -134,27 +134,27 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1A202C',
+    color: COLOURS.TEXT_PRIMARY,
     marginBottom: 4,
   },
   outputState: {
     fontSize: 16,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     marginTop: 4,
   },
   lowConfidence: {
     marginTop: 10,
-    backgroundColor: '#EDF2F7',
+    backgroundColor: COLOURS.LOW_CONF_BG,
     borderRadius: 6,
     padding: 8,
   },
   lowConfidenceText: {
     fontSize: 12,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
   },
   disclaimer: {
     fontSize: 11,
-    color: '#A0AEC0',
+    color: COLOURS.TEXT_FAINT,
     marginTop: 4,
   },
   flagRow: {
@@ -166,18 +166,18 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#CBD5E0',
+    borderColor: COLOURS.BORDER_SUBTLE,
   },
   flagBtnDisabled: {
     opacity: 0.5,
   },
   flagBtnText: {
     fontSize: 12,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
   },
   flagConfirmed: {
     fontSize: 12,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
   },
   flagError: {
     fontSize: 12,

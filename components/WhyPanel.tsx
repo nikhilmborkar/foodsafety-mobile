@@ -414,7 +414,7 @@ const styles = StyleSheet.create({
   toggleLabel: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
   },
   chevron: {
     fontSize: 11,
@@ -437,7 +437,7 @@ const styles = StyleSheet.create({
   },
   ruleItem: {
     fontSize: 13,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     lineHeight: 19,
     marginBottom: 2,
   },

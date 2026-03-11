@@ -15,6 +15,7 @@ import { useFocusEffect, useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEvaluate } from '../hooks/useEvaluate';
 import { Profile } from '../types';
+import { COLOURS } from '../constants/colours';
 
 const CORNER_SIZE = 26;
 const CORNER_WIDTH = 3;
@@ -170,7 +171,7 @@ export default function ScanScreen() {
               value={manualBarcode}
               onChangeText={setManualBarcode}
               placeholder="e.g. 8710339427403"
-              placeholderTextColor="#A0AEC0"
+              placeholderTextColor={COLOURS.TEXT_FAINT}
               keyboardType="number-pad"
               autoFocus
             />
@@ -205,21 +206,21 @@ export default function ScanScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#000',          // camera backing — no semantic token
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'space-between',
   },
   bannerContainer: {
-    backgroundColor: 'rgba(0,0,0,0.65)',
+    backgroundColor: 'rgba(0,0,0,0.65)', // semi-transparent overlay — no token
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
   bannerText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontSize: 15,
     fontWeight: '500',
     textAlign: 'center',
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: CORNER_SIZE,
     height: CORNER_SIZE,
-    borderColor: '#FFFFFF',
+    borderColor: COLOURS.WHITE,
   },
   cornerTL: {
     top: 0,
@@ -261,7 +262,7 @@ const styles = StyleSheet.create({
     borderRightWidth: CORNER_WIDTH,
   },
   bottomContainer: {
-    backgroundColor: 'rgba(0,0,0,0.65)',
+    backgroundColor: 'rgba(0,0,0,0.65)', // semi-transparent overlay — no token
     paddingTop: 20,
     paddingBottom: 44,
     paddingHorizontal: 20,
@@ -269,7 +270,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   statusText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontSize: 15,
     textAlign: 'center',
   },
@@ -278,24 +279,24 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   errorText: {
-    color: '#FEB2B2',
+    color: COLOURS.SCAN_ERROR,
     fontSize: 14,
     textAlign: 'center',
   },
   retryText: {
-    color: '#90CDF4',
+    color: COLOURS.SCAN_INFO,
     fontSize: 14,
     fontWeight: '500',
   },
   manualBtn: {
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.5)',
+    borderColor: 'rgba(255,255,255,0.5)', // semi-transparent — no token
     borderRadius: 8,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   manualBtnText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontSize: 14,
     fontWeight: '500',
   },
@@ -304,22 +305,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: COLOURS.BACKGROUND,
   },
   permissionText: {
     fontSize: 16,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     textAlign: 'center',
     marginBottom: 16,
   },
   permissionBtn: {
-    backgroundColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   permissionBtnText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontSize: 15,
     fontWeight: '600',
   },
@@ -328,7 +329,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   manualModal: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOURS.SURFACE,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     padding: 24,
@@ -337,16 +338,16 @@ const styles = StyleSheet.create({
   manualTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#1A202C',
+    color: COLOURS.TEXT_PRIMARY,
   },
   manualInput: {
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: COLOURS.BORDER,
     borderRadius: 8,
     padding: 14,
     fontSize: 18,
-    color: '#1A202C',
-    backgroundColor: '#F7FAFC',
+    color: COLOURS.TEXT_PRIMARY,
+    backgroundColor: COLOURS.BACKGROUND,
     letterSpacing: 2,
   },
   manualButtons: {
@@ -356,29 +357,29 @@ const styles = StyleSheet.create({
   manualCancelBtn: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: COLOURS.BORDER,
     borderRadius: 8,
     padding: 14,
     alignItems: 'center',
   },
   manualCancelText: {
     fontSize: 15,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     fontWeight: '500',
   },
   manualSubmitBtn: {
     flex: 1,
-    backgroundColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
     borderRadius: 8,
     padding: 14,
     alignItems: 'center',
   },
   manualSubmitBtnDisabled: {
-    backgroundColor: '#A0AEC0',
+    backgroundColor: COLOURS.TEXT_FAINT,
   },
   manualSubmitText: {
     fontSize: 15,
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontWeight: '600',
   },
 });

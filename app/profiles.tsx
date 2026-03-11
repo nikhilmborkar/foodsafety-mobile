@@ -12,6 +12,7 @@ import { useProfiles } from '../hooks/useProfiles';
 import { ProfileForm } from '../components/ProfileForm';
 import { ProfileList } from '../components/ProfileList';
 import { Profile } from '../types';
+import { COLOURS } from '../constants/colours';
 
 export default function ProfilesScreen() {
   const { profiles, load, addProfile, updateProfile, deleteProfile } =
@@ -91,7 +92,7 @@ export default function ProfilesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: COLOURS.BACKGROUND,
   },
   content: {
     padding: 16,
@@ -105,31 +106,31 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#1A202C',
+    color: COLOURS.TEXT_PRIMARY,
   },
   addBtn: {
-    backgroundColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 8,
   },
   addBtnText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontSize: 14,
     fontWeight: '600',
   },
   modal: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOURS.SURFACE,
   },
   modalHeader: {
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
+    borderBottomColor: COLOURS.BORDER,
   },
   modalTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#1A202C',
+    color: COLOURS.TEXT_PRIMARY,
   },
 });

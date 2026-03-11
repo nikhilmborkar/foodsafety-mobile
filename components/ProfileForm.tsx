@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Profile } from '../types';
 import { EU14_ALLERGENS } from '../constants/allergens';
+import { COLOURS } from '../constants/colours';
 
 interface Props {
   initial?: Partial<Profile>;
@@ -105,7 +106,7 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
         value={name}
         onChangeText={setName}
         placeholder="e.g. Emma or Max"
-        placeholderTextColor="#A0AEC0"
+        placeholderTextColor={COLOURS.TEXT_FAINT}
       />
 
       <Text style={styles.label}>Type</Text>
@@ -310,12 +311,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOURS.SURFACE,
   },
   label: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     marginTop: 16,
     marginBottom: 6,
     textTransform: 'uppercase',
@@ -323,12 +324,12 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: COLOURS.BORDER,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
-    color: '#1A202C',
-    backgroundColor: '#F7FAFC',
+    color: COLOURS.TEXT_PRIMARY,
+    backgroundColor: COLOURS.BACKGROUND,
   },
   segmentRow: {
     flexDirection: 'row',
@@ -337,23 +338,23 @@ const styles = StyleSheet.create({
   segment: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: COLOURS.BORDER,
     borderRadius: 8,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: '#F7FAFC',
+    backgroundColor: COLOURS.BACKGROUND,
   },
   segmentActive: {
-    backgroundColor: '#2B6CB0',
-    borderColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
+    borderColor: COLOURS.PRIMARY,
   },
   segmentText: {
     fontSize: 14,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     fontWeight: '500',
   },
   segmentTextActive: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontWeight: '600',
   },
   chipRow: {
@@ -363,53 +364,53 @@ const styles = StyleSheet.create({
   },
   chip: {
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: COLOURS.BORDER,
     borderRadius: 20,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: COLOURS.BACKGROUND,
   },
   chipActive: {
-    backgroundColor: '#2B6CB0',
-    borderColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
+    borderColor: COLOURS.PRIMARY,
   },
   chipText: {
     fontSize: 13,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
   },
   chipTextActive: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontWeight: '600',
   },
   helperText: {
     fontSize: 12,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
     marginBottom: 6,
   },
   lifeStageNote: {
-    backgroundColor: '#EBF8FF',
+    backgroundColor: COLOURS.INFO_BG,
     borderRadius: 8,
     padding: 12,
     marginTop: 8,
     borderLeftWidth: 3,
-    borderLeftColor: '#3182CE',
+    borderLeftColor: COLOURS.INFO_ACCENT,
   },
   lifeStageNoteText: {
     fontSize: 13,
-    color: '#1A365D',
+    color: COLOURS.INFO_TEXT,
     lineHeight: 18,
   },
   toxinNote: {
-    backgroundColor: '#FFFBEB',
+    backgroundColor: COLOURS.WARN_BG,
     borderRadius: 8,
     padding: 12,
     marginTop: 8,
     borderLeftWidth: 3,
-    borderLeftColor: '#D69E2E',
+    borderLeftColor: COLOURS.WARN,
   },
   toxinNoteText: {
     fontSize: 13,
-    color: '#744210',
+    color: COLOURS.WARN_TEXT,
     lineHeight: 18,
   },
   buttonRow: {
@@ -421,29 +422,29 @@ const styles = StyleSheet.create({
   cancelBtn: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: COLOURS.BORDER,
     borderRadius: 8,
     padding: 14,
     alignItems: 'center',
   },
   cancelText: {
     fontSize: 15,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     fontWeight: '500',
   },
   saveBtn: {
     flex: 1,
-    backgroundColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
     borderRadius: 8,
     padding: 14,
     alignItems: 'center',
   },
   saveBtnDisabled: {
-    backgroundColor: '#A0AEC0',
+    backgroundColor: COLOURS.TEXT_FAINT,
   },
   saveText: {
     fontSize: 15,
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontWeight: '600',
   },
 });

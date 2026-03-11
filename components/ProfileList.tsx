@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { Profile } from '../types';
+import { COLOURS } from '../constants/colours';
 
 interface Props {
   profiles: Profile[];
@@ -77,22 +78,22 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#4A5568',
+    color: COLOURS.TEXT_MID,
     fontWeight: '500',
   },
   emptySubtext: {
     fontSize: 14,
-    color: '#A0AEC0',
+    color: COLOURS.TEXT_FAINT,
     marginTop: 4,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLOURS.SURFACE,
     borderRadius: 10,
     padding: 14,
     marginBottom: 10,
-    shadowColor: '#000',
+    shadowColor: '#000',               // shadow color — no semantic token
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.07,
     shadowRadius: 3,
@@ -102,13 +103,13 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
   },
   avatarText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontWeight: '700',
     fontSize: 20,
   },
@@ -118,16 +119,16 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1A202C',
+    color: COLOURS.TEXT_PRIMARY,
   },
   type: {
     fontSize: 13,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
     marginTop: 2,
   },
   summary: {
     fontSize: 12,
-    color: '#A0AEC0',
+    color: COLOURS.TEXT_FAINT,
     marginTop: 2,
   },
   actions: {
@@ -140,11 +141,11 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#2B6CB0',
+    borderColor: COLOURS.PRIMARY,
   },
   editText: {
     fontSize: 13,
-    color: '#2B6CB0',
+    color: COLOURS.PRIMARY,
     fontWeight: '500',
   },
   deleteBtn: {
@@ -152,11 +153,11 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#E53E3E',
+    borderColor: COLOURS.BLOCK,
   },
   deleteText: {
     fontSize: 13,
-    color: '#E53E3E',
+    color: COLOURS.BLOCK,
     fontWeight: '500',
   },
 });

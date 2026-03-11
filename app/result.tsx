@@ -12,6 +12,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EvaluateResponse, Profile } from '../types';
 import { MemberCard } from '../components/MemberCard';
+import { COLOURS } from '../constants/colours';
 
 export default function ResultScreen() {
   const { data } = useLocalSearchParams<{ data: string }>();
@@ -87,7 +88,7 @@ export default function ResultScreen() {
         )}
 
         {profilesLoading ? (
-          <ActivityIndicator size="large" color="#2B6CB0" style={styles.spinner} />
+          <ActivityIndicator size="large" color={COLOURS.PRIMARY} style={styles.spinner} />
         ) : (
           result.evaluations.map(evaluation => (
             <MemberCard
@@ -110,7 +111,7 @@ export default function ResultScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: COLOURS.BACKGROUND,
   },
   content: {
     padding: 16,
@@ -129,32 +130,32 @@ const styles = StyleSheet.create({
   },
   settingsIcon: {
     fontSize: 22,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
   },
   productName: {
     fontSize: 22,
     fontWeight: '700',
-    color: '#1A202C',
+    color: COLOURS.TEXT_PRIMARY,
   },
   productId: {
     fontSize: 13,
-    color: '#A0AEC0',
+    color: COLOURS.TEXT_FAINT,
     marginTop: 2,
   },
   lowConfidenceBanner: {
-    backgroundColor: '#EDF2F7',
+    backgroundColor: COLOURS.LOW_CONF_BG,
     borderRadius: 8,
     padding: 12,
     marginBottom: 16,
   },
   lowConfidenceBannerText: {
     fontSize: 13,
-    color: '#718096',
+    color: COLOURS.TEXT_SECONDARY,
     textAlign: 'center',
   },
   errorText: {
     fontSize: 16,
-    color: '#E53E3E',
+    color: COLOURS.BLOCK,
     textAlign: 'center',
     margin: 24,
   },
@@ -162,14 +163,14 @@ const styles = StyleSheet.create({
     marginVertical: 24,
   },
   scanAgainBtn: {
-    backgroundColor: '#2B6CB0',
+    backgroundColor: COLOURS.PRIMARY,
     borderRadius: 10,
     padding: 16,
     alignItems: 'center',
     marginTop: 16,
   },
   scanAgainText: {
-    color: '#FFFFFF',
+    color: COLOURS.WHITE,
     fontSize: 16,
     fontWeight: '600',
   },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { Tabs } from 'expo-router';
+import { COLOURS } from '../constants/colours';
 
 function ScanIcon({ color }: { color: string }) {
   return <Text style={{ fontSize: 20, color }}>⬛</Text>;
@@ -16,12 +17,12 @@ export default function RootLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
-          borderTopColor: '#E2E8F0',
+          backgroundColor: COLOURS.SURFACE,
+          borderTopColor: COLOURS.BORDER,
           borderTopWidth: 1,
         },
-        tabBarActiveTintColor: '#2B6CB0',
-        tabBarInactiveTintColor: '#A0AEC0',
+        tabBarActiveTintColor: COLOURS.PRIMARY,
+        tabBarInactiveTintColor: COLOURS.TEXT_FAINT,
       }}
     >
       <Tabs.Screen
