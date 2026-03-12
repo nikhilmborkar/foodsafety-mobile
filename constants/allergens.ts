@@ -1,3 +1,20 @@
+export const ALLERGEN_LABELS: Record<string, string> = {
+  gluten_cereals: 'Gluten',
+  milk:           'Milk',
+  eggs:           'Eggs',
+  peanuts:        'Peanuts',
+  soybeans:       'Soy',
+  tree_nuts:      'Tree nuts',
+  fish:           'Fish',
+  crustaceans:    'Crustaceans',
+  molluscs:       'Molluscs',
+  sesame:         'Sesame',
+  celery:         'Celery',
+  mustard:        'Mustard',
+  lupin:          'Lupin',
+  sulphites:      'Sulphites',
+};
+
 export const EU14_ALLERGENS = [
   { id: 'gluten_cereals', label: 'Gluten (wheat, rye, barley, oats)' },
   { id: 'crustaceans',    label: 'Crustaceans (shrimp, crab, lobster)' },

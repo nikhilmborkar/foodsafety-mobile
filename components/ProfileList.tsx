@@ -4,6 +4,7 @@ import { Profile } from '../types';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
 import { AGE_GROUP_LABELS } from '../constants/ageGroups';
+import { ALLERGEN_LABELS } from '../constants/allergens';
 
 interface Props {
   profiles: Profile[];
@@ -20,8 +21,9 @@ function profileSummary(profile: Profile): string {
   }
   const allergens = profile.Allergy_Block_Contains.split(';').filter(Boolean);
   if (allergens.length > 0) {
-    const shown = allergens.slice(0, 2).join(', ');
-    const extra = allergens.length > 2 ? ` +${allergens.length - 2}` : '';
+    const labels = allergens.map(key => ALLERGEN_LABELS[key] ?? key);
+    const shown = labels.slice(0, 2).join(', ');
+    const extra = labels.length > 2 ? ` +${labels.length - 2}` : '';
     parts.push(`Blocks: ${shown}${extra}`);
   }
   return parts.join(' · ');
