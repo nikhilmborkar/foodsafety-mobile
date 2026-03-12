@@ -227,8 +227,10 @@ const styles = StyleSheet.create({
   },
   inconclusiveCard: {
     alignItems: 'center',
-    backgroundColor: COLOURS.SURFACE,
+    backgroundColor: COLOURS.CARD_BACKGROUND,
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: COLOURS.BORDER,
     padding: 32,
     marginBottom: 20,
     shadowColor: '#000',

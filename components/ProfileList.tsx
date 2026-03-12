@@ -93,8 +93,10 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLOURS.SURFACE,
+    backgroundColor: COLOURS.CARD_BACKGROUND,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLOURS.BORDER,
     padding: 14,
     marginBottom: 10,
     shadowColor: '#000',               // shadow color — no semantic token

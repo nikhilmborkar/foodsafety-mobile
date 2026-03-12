@@ -1,27 +1,28 @@
 export const COLOURS = {
   // Brand
-  PRIMARY:        '#0F172A',  // Midnight
+  PRIMARY:          '#0F172A',  // Midnight
 
   // Semantic outcomes
-  ALLOW:          '#10B981',  // Emerald
-  WARN:           '#F59E0B',  // Amber
-  BLOCK:          '#E11D48',  // Rose Red
-  INCONCLUSIVE:   '#64748B',  // Slate
+  ALLOW:            '#10B981',  // Emerald
+  WARN:             '#D97706',  // Amber (dark)
+  BLOCK:            '#BE123C',  // Rose Red (dark)
+  INCONCLUSIVE:     '#64748B',  // Slate
 
   // Backgrounds
-  BACKGROUND:     '#FBFBFA',  // Alabaster
-  SURFACE:        '#FFFFFF',
-  WHITE:          '#FFFFFF',
+  BACKGROUND:       '#F3E9DA',  // Warm parchment
+  CARD_BACKGROUND:  '#F6EFE4',  // Card surface
+  SURFACE:          '#FFFFFF',
+  WHITE:            '#FFFFFF',
 
   // Text
-  TEXT_PRIMARY:   '#0F172A',
-  TEXT_SECONDARY: '#64748B',  // Slate
-  TEXT_MID:       '#475569',
-  TEXT_FAINT:     '#94A3B8',
+  TEXT_PRIMARY:     '#0F172A',
+  TEXT_SECONDARY:   '#64748B',  // Slate
+  TEXT_MID:         '#475569',
+  TEXT_FAINT:       '#94A3B8',
 
   // Borders
-  BORDER:         '#E2E8F0',
-  BORDER_SUBTLE:  '#CBD5E0',
+  BORDER:           '#A3B18A',  // Sage green
+  BORDER_SUBTLE:    '#CBD5E0',
 
   // Surface tints
   INFO_BG:        '#EFF6FF',

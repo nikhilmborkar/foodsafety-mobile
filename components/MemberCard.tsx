@@ -103,11 +103,13 @@ export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: COLOURS.SURFACE,
+    backgroundColor: COLOURS.CARD_BACKGROUND,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLOURS.BORDER,
+    borderLeftWidth: 4,
     padding: 14,
     marginBottom: 12,
-    borderLeftWidth: 4,
     shadowColor: '#000',               // shadow color — no semantic token
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
