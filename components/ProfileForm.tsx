@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: COLOURS.SURFACE,
+    backgroundColor: COLOURS.BACKGROUND,
   },
   label: {
     fontSize: 13,
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     color: COLOURS.TEXT_PRIMARY,
-    backgroundColor: COLOURS.BACKGROUND,
+    backgroundColor: COLOURS.CARD_BACKGROUND,
   },
   segmentRow: {
     flexDirection: 'row',
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: COLOURS.BACKGROUND,
+    backgroundColor: COLOURS.CARD_BACKGROUND,
   },
   segmentActive: {
     backgroundColor: COLOURS.PRIMARY,
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 12,
     paddingVertical: 6,
-    backgroundColor: COLOURS.BACKGROUND,
+    backgroundColor: COLOURS.CARD_BACKGROUND,
   },
   chipActive: {
     backgroundColor: COLOURS.PRIMARY,

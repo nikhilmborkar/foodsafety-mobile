@@ -13,6 +13,7 @@ import { ProfileForm } from '../components/ProfileForm';
 import { ProfileList } from '../components/ProfileList';
 import { Profile } from '../types';
 import { COLOURS } from '../constants/colours';
+import { TYPOGRAPHY } from '../constants/typography';
 
 export default function ProfilesScreen() {
   const { profiles, load, addProfile, updateProfile, deleteProfile } =
@@ -104,6 +105,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   title: {
+    ...TYPOGRAPHY.heading,
+    fontFamily: 'Fraunces_600SemiBold',
     fontSize: 28,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,
@@ -115,13 +118,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   addBtnText: {
+    ...TYPOGRAPHY.bodyMedium,
     color: COLOURS.WHITE,
     fontSize: 14,
     fontWeight: '600',
   },
   modal: {
     flex: 1,
-    backgroundColor: COLOURS.SURFACE,
+    backgroundColor: COLOURS.BACKGROUND,
   },
   modalHeader: {
     padding: 16,
@@ -129,6 +133,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOURS.BORDER,
   },
   modalTitle: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 20,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,
