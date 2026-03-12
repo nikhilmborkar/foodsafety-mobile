@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { Profile } from '../types';
 import { COLOURS } from '../constants/colours';
+import { TYPOGRAPHY } from '../constants/typography';
+import { AGE_GROUP_LABELS } from '../constants/ageGroups';
 
 interface Props {
   profiles: Profile[];
@@ -14,7 +16,7 @@ function profileSummary(profile: Profile): string {
   if (profile.Profile_Type === 'Pet') {
     parts.push(profile.Pet_Species);
   } else {
-    parts.push(profile.Age_Group);
+    parts.push(AGE_GROUP_LABELS[profile.Age_Group] ?? profile.Age_Group);
   }
   const allergens = profile.Allergy_Block_Contains.split(';').filter(Boolean);
   if (allergens.length > 0) {
@@ -77,11 +79,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   emptyText: {
+    ...TYPOGRAPHY.bodyMedium,
     fontSize: 16,
     color: COLOURS.TEXT_MID,
     fontWeight: '500',
   },
   emptySubtext: {
+    ...TYPOGRAPHY.body,
     fontSize: 14,
     color: COLOURS.TEXT_FAINT,
     marginTop: 4,
@@ -109,6 +113,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   avatarText: {
+    ...TYPOGRAPHY.heading,
     color: COLOURS.WHITE,
     fontWeight: '700',
     fontSize: 20,
@@ -117,16 +122,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   name: {
+    ...TYPOGRAPHY.subheading,
     fontSize: 16,
     fontWeight: '600',
     color: COLOURS.TEXT_PRIMARY,
   },
   type: {
+    ...TYPOGRAPHY.body,
     fontSize: 13,
     color: COLOURS.TEXT_SECONDARY,
     marginTop: 2,
   },
   summary: {
+    ...TYPOGRAPHY.body,
     fontSize: 12,
     color: COLOURS.TEXT_FAINT,
     marginTop: 2,
@@ -144,6 +152,7 @@ const styles = StyleSheet.create({
     borderColor: COLOURS.PRIMARY,
   },
   editText: {
+    ...TYPOGRAPHY.bodyMedium,
     fontSize: 13,
     color: COLOURS.PRIMARY,
     fontWeight: '500',
@@ -156,6 +165,7 @@ const styles = StyleSheet.create({
     borderColor: COLOURS.BLOCK,
   },
   deleteText: {
+    ...TYPOGRAPHY.bodyMedium,
     fontSize: 13,
     color: COLOURS.BLOCK,
     fontWeight: '500',

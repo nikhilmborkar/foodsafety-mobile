@@ -10,6 +10,7 @@ import {
 import { Profile } from '../types';
 import { EU14_ALLERGENS } from '../constants/allergens';
 import { COLOURS } from '../constants/colours';
+import { AGE_GROUP_LABELS } from '../constants/ageGroups';
 
 interface Props {
   initial?: Partial<Profile>;
@@ -18,21 +19,24 @@ interface Props {
 }
 
 const AGE_GROUPS: { value: Profile['Age_Group']; label: string }[] = [
-  { value: 'Baby_0_12m',    label: 'Baby (0–12 months)' },
-  { value: 'Toddler_1_3y', label: 'Toddler (1–3 years)' },
-  { value: 'Child',         label: 'Child (4–12 years)' },
-  { value: 'Teen',          label: 'Teen (13–17 years)' },
-  { value: 'Adult',         label: 'Adult' },
-  { value: 'Senior',        label: 'Senior (65+)' },
-  { value: 'Pregnant',      label: 'Pregnant' },
-  { value: 'Breastfeeding', label: 'Breastfeeding' },
+  { value: 'YoungInfant_0_6m',  label: AGE_GROUP_LABELS['YoungInfant_0_6m'] },
+  { value: 'OlderInfant_7_12m', label: AGE_GROUP_LABELS['OlderInfant_7_12m'] },
+  { value: 'Toddler_1_3y',      label: 'Toddler (1–3 years)' },
+  { value: 'Child',             label: 'Child (4–12 years)' },
+  { value: 'Teen',              label: 'Teen (13–17 years)' },
+  { value: 'Adult',             label: 'Adult' },
+  { value: 'Senior',            label: 'Senior (65+)' },
+  { value: 'Pregnant',          label: 'Pregnant' },
+  { value: 'Breastfeeding',     label: 'Breastfeeding' },
 ];
 
 const LIFE_STAGE_NOTES: Partial<Record<Profile['Age_Group'], string>> = {
-  Baby_0_12m:    '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
-  Toddler_1_3y:  '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
-  Pregnant:      '⚠️ Pregnancy safety rules apply — alcohol, raw fish, unpasteurised cheese, caffeine',
-  Breastfeeding: '⚠️ Breastfeeding rules apply — alcohol and caffeine flagged automatically',
+  YoungInfant_0_6m:  '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  OlderInfant_7_12m: '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  Baby_0_12m:        '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  Toddler_1_3y:      '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  Pregnant:          '⚠️ Pregnancy safety rules apply — alcohol, raw fish, unpasteurised cheese, caffeine',
+  Breastfeeding:     '⚠️ Breastfeeding rules apply — alcohol and caffeine flagged automatically',
 };
 const PET_SPECIES: Array<'Dog' | 'Cat'> = ['Dog', 'Cat'];
 const SENSITIVITY: Profile['Sensitivity_Level'][] = ['Normal', 'Strict'];
