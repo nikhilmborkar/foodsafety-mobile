@@ -117,12 +117,6 @@ export default function ResultScreen() {
             <Text style={styles.productName}>{result.product_name}</Text>
             <Text style={styles.productId}>{result.product_id}</Text>
           </View>
-          <TouchableOpacity
-            style={styles.settingsBtn}
-            onPress={() => router.push('/profiles')}
-          >
-            <Text style={styles.settingsIcon}>⚙</Text>
-          </TouchableOpacity>
         </View>
 
         {hasLowConfidence && (
@@ -170,16 +164,9 @@ const styles = StyleSheet.create({
   headerLeft: {
     flex: 1,
   },
-  settingsBtn: {
-    padding: 4,
-    marginLeft: 8,
-  },
-  settingsIcon: {
-    fontSize: 22,
-    color: COLOURS.TEXT_SECONDARY,
-  },
   productName: {
     ...TYPOGRAPHY.heading,
+    fontFamily: 'Fraunces_600SemiBold',
     fontSize: 22,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,
@@ -248,6 +235,7 @@ const styles = StyleSheet.create({
   },
   inconclusiveHeadline: {
     ...TYPOGRAPHY.heading,
+    fontFamily: 'Fraunces_600SemiBold',
     fontSize: 20,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,

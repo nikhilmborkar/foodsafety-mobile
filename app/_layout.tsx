@@ -24,6 +24,10 @@ function HouseholdIcon({ color }: { color: string }) {
   return <Text style={{ fontSize: 20, color }}>👥</Text>;
 }
 
+function SettingsIcon({ color }: { color: string }) {
+  return <Text style={{ fontSize: 20, color }}>⚙</Text>;
+}
+
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     PlusJakartaSans_600SemiBold,
@@ -48,12 +52,18 @@ export default function RootLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: COLOURS.SURFACE,
-          borderTopColor: COLOURS.BORDER,
-          borderTopWidth: 1,
+          backgroundColor: '#A3B18A',
+          borderTopWidth: 0,
+          height: 64,
+          paddingTop: 8,
+          paddingBottom: 8,
         },
-        tabBarActiveTintColor: COLOURS.PRIMARY,
-        tabBarInactiveTintColor: COLOURS.TEXT_FAINT,
+        tabBarActiveTintColor: '#0F172A',
+        tabBarInactiveTintColor: '#F3E9DA',
+        tabBarLabelStyle: {
+          fontFamily: 'Inter_500Medium',
+          fontSize: 12,
+        },
       }}
     >
       <Tabs.Screen
@@ -68,6 +78,13 @@ export default function RootLayout() {
         options={{
           title: 'Household',
           tabBarIcon: ({ color }) => <HouseholdIcon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color }) => <SettingsIcon color={color} />,
         }}
       />
       <Tabs.Screen
