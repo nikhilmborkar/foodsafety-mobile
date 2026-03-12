@@ -138,7 +138,7 @@ export default function ResultScreen() {
         ) : (
           result.evaluations.map(evaluation => (
             <MemberCard
-              key={evaluation.Profile_ID}
+              key={`${evaluation.Profile_ID}-${result.scan_log_id ?? result.product_id}`}
               profileName={getProfileName(evaluation.Profile_ID)}
               evaluation={evaluation}
               scanLogId={result.scan_log_id ?? null}
