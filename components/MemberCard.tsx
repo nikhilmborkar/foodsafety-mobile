@@ -55,7 +55,7 @@ export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
   return (
     <View style={[styles.card, { borderLeftColor: outcomeColour }]}>
       <View style={styles.row}>
-        <View style={[styles.avatar, { backgroundColor: outcomeColour }]}>
+        <View style={styles.avatar}>
           <Text style={styles.avatarText}>{initial}</Text>
         </View>
         <View style={styles.info}>
@@ -121,18 +121,18 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: COLOURS.BORDER,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
+    marginRight: 10,
   },
   avatarText: {
-    ...TYPOGRAPHY.heading,
+    fontFamily: 'Inter_500Medium',
+    fontSize: 14,
     color: COLOURS.WHITE,
-    fontWeight: '700',
-    fontSize: 18,
   },
   info: {
     flex: 1,
@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
   },
   name: {
     ...TYPOGRAPHY.subheading,
-    fontSize: 16,
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 20,
     fontWeight: '600',
     color: COLOURS.TEXT_PRIMARY,
     marginBottom: 4,
