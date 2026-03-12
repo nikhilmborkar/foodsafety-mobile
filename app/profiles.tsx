@@ -49,7 +49,7 @@ export default function ProfilesScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.title}>Household</Text>
+          <Text style={styles.wordmark}>fufu</Text>
           <TouchableOpacity
             style={styles.addBtn}
             onPress={() => {
@@ -104,24 +104,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  title: {
-    ...TYPOGRAPHY.heading,
+  wordmark: {
     fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 28,
-    fontWeight: '700',
-    color: COLOURS.TEXT_PRIMARY,
+    fontSize: 42,
+    lineHeight: 48,
+    color: COLOURS.PRIMARY,
+    letterSpacing: -1.5,
+    textAlign: 'left',
   },
   addBtn: {
     backgroundColor: COLOURS.PRIMARY,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 8,
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
   addBtnText: {
-    ...TYPOGRAPHY.bodyMedium,
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 15,
     color: COLOURS.WHITE,
-    fontSize: 14,
-    fontWeight: '600',
+    letterSpacing: -0.3,
   },
   modal: {
     flex: 1,
