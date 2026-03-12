@@ -24,6 +24,7 @@ export interface EvaluationOutput {
   Matched_Rule_IDs?: string[];
   Matched_Signals?: string[];
   Message_Codes?: string[];
+  Allergen_Source_Details?: Record<string, string[]>;
 }
 
 export interface EvaluateRequest {

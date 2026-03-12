@@ -283,6 +283,24 @@ const RULE_EXPLANATIONS: Record<string, string> = {
   R631: 'Contains high levels of caffeine — limit while breastfeeding.',
 };
 
+// ─── Gluten source renderer ───────────────────────────────────────────────────
+// Returns a source-specific explanation when the backend provides grain detail.
+// Falls back to the static SIGNAL_EXPLANATIONS entry when no detail is present.
+
+function glutenExplanation(
+  signal: 'gluten_cereals.contains' | 'gluten_cereals.may_contain',
+  sources: string[] | undefined
+): string {
+  if (!sources || sources.length === 0) {
+    return SIGNAL_EXPLANATIONS[signal];
+  }
+  const grainList = sources.join(', ');
+  if (signal === 'gluten_cereals.contains') {
+    return `Contains ${grainList}.`;
+  }
+  return `May contain ${grainList} (precautionary label).`;
+}
+
 // ─── Explanation builder ──────────────────────────────────────────────────────
 // Returns one deduplicated explanation string per distinct reason.
 // Rendering order: signal-level first, rule-level fallback if no signals mapped.
@@ -290,6 +308,7 @@ const RULE_EXPLANATIONS: Record<string, string> = {
 function buildExplanations(evaluation: EvaluationOutput): string[] {
   const signals = evaluation.Matched_Signals ?? [];
   const ruleIds = evaluation.Matched_Rule_IDs ?? [];
+  const glutenSources = evaluation.Allergen_Source_Details?.gluten_cereals;
   const seen = new Set<string>();
   const results: string[] = [];
 
@@ -302,8 +321,12 @@ function buildExplanations(evaluation: EvaluationOutput): string[] {
 
   // Phase 1: signal-level explanations (most specific)
   for (const signal of signals) {
-    const text = SIGNAL_EXPLANATIONS[signal];
-    if (text) push(text);
+    if (signal === 'gluten_cereals.contains' || signal === 'gluten_cereals.may_contain') {
+      push(glutenExplanation(signal, glutenSources));
+    } else {
+      const text = SIGNAL_EXPLANATIONS[signal];
+      if (text) push(text);
+    }
   }
 
   // Phase 2: if no signal mapped, fall back to rule-level explanations
