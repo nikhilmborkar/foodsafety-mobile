@@ -281,46 +281,58 @@ export default function ScanScreen() {
             <View style={styles.cardRow}>
               {/* Household card */}
               <View style={styles.householdCard}>
-                <Text style={styles.householdTierLabel}>HOUSEHOLD</Text>
-                <View style={styles.priceRow}>
-                  <Text style={styles.householdPrice}>€7.99</Text>
-                  <Text style={styles.householdPerMonth}>/mo</Text>
+                <View style={styles.cardInner}>
+                  <View>
+                    <Text style={styles.householdTierLabel}>HOUSEHOLD</Text>
+                    <View style={styles.priceRow}>
+                      <Text style={styles.householdPrice}>€7.99</Text>
+                      <Text style={styles.householdPerMonth}>/mo</Text>
+                    </View>
+                    <View style={styles.featureList}>
+                      <Text style={styles.householdFeature}>✓  Scan any ingredient label</Text>
+                      <Text style={styles.householdFeature}>✓  Scan restaurant menus</Text>
+                      <Text style={styles.householdFeature}>✓  Scan history</Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                    style={styles.householdBtn}
+                    onPress={() => console.log('household tapped')}
+                  >
+                    <Text style={styles.householdBtnText}>Get Household</Text>
+                  </TouchableOpacity>
                 </View>
-                <Text style={styles.householdFeature}>✓  Ingredient label OCR</Text>
-                <Text style={styles.householdFeature}>✓  Restaurant menu scanning</Text>
-                <Text style={styles.householdFeature}>✓  Scan history</Text>
-                <TouchableOpacity
-                  style={styles.householdBtn}
-                  onPress={() => console.log('household tapped')}
-                >
-                  <Text style={styles.householdBtnText}>Choose Household</Text>
-                </TouchableOpacity>
               </View>
 
               {/* Guardian card */}
               <View style={styles.guardianCard}>
-                <View style={styles.bestValueBadge}>
-                  <Text style={styles.bestValueText}>BEST VALUE</Text>
+                <View style={styles.cardInner}>
+                  <View>
+                    <View style={styles.bestValueBadge}>
+                      <Text style={styles.bestValueText}>BEST VALUE</Text>
+                    </View>
+                    <Text style={styles.guardianTierLabel}>GUARDIAN</Text>
+                    <View style={styles.priceRow}>
+                      <Text style={styles.guardianPrice}>€11.99</Text>
+                      <Text style={styles.guardianPerMonth}>/mo</Text>
+                    </View>
+                    <View style={styles.featureList}>
+                      <Text style={styles.guardianFeature}>✓  Scan labels & restaurant menus</Text>
+                      <Text style={styles.guardianFeature}>✓  Scan history</Text>
+                      <Text style={styles.guardianFeature}>✓  Advanced safety verification</Text>
+                      <Text style={styles.guardianFeature}>✓  Recall & safety alerts — humans & pets</Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                    style={styles.guardianBtn}
+                    onPress={() => console.log('guardian tapped')}
+                  >
+                    <Text style={styles.guardianBtnText}>Get Guardian</Text>
+                  </TouchableOpacity>
                 </View>
-                <Text style={styles.guardianTierLabel}>GUARDIAN</Text>
-                <View style={styles.priceRow}>
-                  <Text style={styles.guardianPrice}>€11.99</Text>
-                  <Text style={styles.guardianPerMonth}>/mo</Text>
-                </View>
-                <Text style={styles.guardianFeature}>✓  Ingredient & restaurant OCR</Text>
-                <Text style={styles.guardianFeature}>✓  Scan history</Text>
-                <Text style={styles.guardianFeature}>✓  Advanced safety verification</Text>
-                <Text style={styles.guardianFeature}>✓  Recall & safety alerts — humans & pets</Text>
-                <TouchableOpacity
-                  style={styles.guardianBtn}
-                  onPress={() => console.log('guardian tapped')}
-                >
-                  <Text style={styles.guardianBtnText}>Choose Guardian</Text>
-                </TouchableOpacity>
               </View>
             </View>
 
-            <Text style={styles.annualNote}>Save 35% with annual billing</Text>
+            <Text style={styles.annualNote}>€59.99/yr Household · €94.99/yr Guardian — save 35% with annual billing</Text>
 
             <TouchableOpacity
               onPress={() => {
@@ -615,6 +627,7 @@ const styles = StyleSheet.create({
   },
   householdCard: {
     flex: 1,
+    alignSelf: 'stretch',
     backgroundColor: '#F3E9DA',
     borderWidth: 1,
     borderColor: '#A3B18A',
@@ -652,7 +665,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   householdBtn: {
-    marginTop: 14,
     backgroundColor: '#0F172A',
     borderRadius: 8,
     paddingVertical: 11,
@@ -665,13 +677,14 @@ const styles = StyleSheet.create({
   },
   guardianCard: {
     flex: 1,
+    alignSelf: 'stretch',
     backgroundColor: '#0F172A',
     borderRadius: 12,
     padding: 14,
   },
   bestValueBadge: {
     alignSelf: 'flex-start',
-    backgroundColor: '#10B981',
+    backgroundColor: '#A3B18A',
     borderRadius: 4,
     paddingHorizontal: 6,
     paddingVertical: 2,
@@ -680,7 +693,7 @@ const styles = StyleSheet.create({
   bestValueText: {
     fontFamily: 'Inter_500Medium',
     fontSize: 10,
-    color: '#FFFFFF',
+    color: '#0F172A',
     letterSpacing: 0.3,
   },
   guardianTierLabel: {
@@ -708,7 +721,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   guardianBtn: {
-    marginTop: 14,
     backgroundColor: '#F3E9DA',
     borderRadius: 8,
     paddingVertical: 11,
@@ -719,9 +731,16 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#0F172A',
   },
+  cardInner: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  featureList: {
+    flex: 1,
+  },
   annualNote: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 12,
+    fontSize: 11,
     color: '#64748B',
     textAlign: 'center',
     marginBottom: 16,
