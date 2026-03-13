@@ -93,12 +93,6 @@ export default function ScanScreen() {
     }
   };
 
-  const memberNames = profiles.map(p => p.Profile_Name).join(', ');
-  const bannerText =
-    profiles.length === 0
-      ? 'No household set up — go to Household tab'
-      : `${memberNames} · Scanning`;
-
   if (!permission) {
     return <View style={styles.container} />;
   }
@@ -130,10 +124,8 @@ export default function ScanScreen() {
 
       {/* Overlay */}
       <View style={styles.overlay}>
-        {/* Top banner */}
-        <View style={styles.bannerContainer}>
-          <Text style={styles.bannerText}>{bannerText}</Text>
-        </View>
+        {/* Wordmark */}
+        <Text style={styles.wordmark}>fufu</Text>
 
         {/* Corner bracket viewfinder */}
         <View style={styles.viewfinderContainer}>
@@ -237,19 +229,16 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'space-between',
   },
-  bannerContainer: {
-    backgroundColor: 'rgba(0,0,0,0.65)', // semi-transparent overlay — no token
-    paddingTop: 60,
-    paddingBottom: 16,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  bannerText: {
-    ...TYPOGRAPHY.bodyMedium,
-    color: COLOURS.WHITE,
-    fontSize: 15,
-    fontWeight: '500',
+  wordmark: {
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 36,
+    color: '#F3E9DA',
+    letterSpacing: -1.5,
     textAlign: 'center',
+    marginTop: 16,
+    textShadowColor: 'rgba(0,0,0,0.35)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
   },
   viewfinderContainer: {
     alignSelf: 'center',
