@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { Tabs } from 'expo-router';
-import HouseholdIcon from '../components/icons/HouseholdIcon';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import {
@@ -18,12 +17,12 @@ import { COLOURS } from '../constants/colours';
 SplashScreen.preventAutoHideAsync();
 
 function ScanIcon({ color }: { color: string }) {
-  return <Text style={{ fontSize: 20, color }}>⬛</Text>;
+  return <Text style={{ fontSize: 24, lineHeight: 28, color }}>⬛</Text>;
 }
 
 
 function SettingsIcon({ color }: { color: string }) {
-  return <Text style={{ fontSize: 20, color }}>⚙</Text>;
+  return <Text style={{ fontSize: 24, lineHeight: 28, color }}>⚙</Text>;
 }
 
 export default function RootLayout() {
@@ -52,15 +51,23 @@ export default function RootLayout() {
         tabBarStyle: {
           backgroundColor: '#A3B18A',
           borderTopWidth: 0,
-          height: 64,
-          paddingTop: 8,
-          paddingBottom: 8,
+          height: 80,
+          paddingTop: 10,
+          paddingBottom: 16,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
+        tabBarItemStyle: {
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
         },
         tabBarActiveTintColor: '#0F172A',
-        tabBarInactiveTintColor: '#F3E9DA',
+        tabBarInactiveTintColor: 'rgba(15,23,42,0.4)',
         tabBarLabelStyle: {
           fontFamily: 'Inter_500Medium',
           fontSize: 12,
+          marginTop: 2,
         },
       }}
     >
@@ -75,7 +82,7 @@ export default function RootLayout() {
         name="profiles"
         options={{
           title: 'Household',
-          tabBarIcon: ({ color }) => <HouseholdIcon color={color} size={24} />,
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, lineHeight: 28, color }}>👥</Text>,
         }}
       />
       <Tabs.Screen

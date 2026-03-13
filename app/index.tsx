@@ -27,6 +27,8 @@ export default function ScanScreen() {
   const [cameraKey, setCameraKey] = useState(0);
   const [manualVisible, setManualVisible] = useState(false);
   const [manualBarcode, setManualBarcode] = useState('');
+  const [scanMode, setScanMode] = useState<'grocery' | 'restaurant'>('grocery');
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const scanLocked = useRef(false);
   const router = useRouter();
   const { loading, slow, error, evaluate, reset } = useEvaluate();
@@ -127,6 +129,26 @@ export default function ScanScreen() {
         {/* Wordmark */}
         <Text style={styles.wordmark}>fufu</Text>
 
+        {/* Mode chips */}
+        <View style={styles.chipRow}>
+          <TouchableOpacity
+            style={scanMode === 'grocery' ? styles.chipActive : styles.chipInactive}
+            onPress={() => setScanMode('grocery')}
+          >
+            <Text style={scanMode === 'grocery' ? styles.chipTextActive : styles.chipTextInactive}>
+              🛒 Grocery
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={scanMode === 'restaurant' ? styles.chipActive : styles.chipInactive}
+            onPress={() => setShowUpgradeModal(true)}
+          >
+            <Text style={scanMode === 'restaurant' ? styles.chipTextActive : styles.chipTextInactive}>
+              🍽 Restaurant
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         {/* Corner bracket viewfinder */}
         <View style={styles.viewfinderContainer}>
           <View style={[styles.corner, styles.cornerTL]} />
@@ -135,7 +157,7 @@ export default function ScanScreen() {
           <View style={[styles.corner, styles.cornerBR]} />
         </View>
 
-        {/* Bottom status + manual entry */}
+        {/* Bottom status + controls */}
         <View style={styles.bottomContainer}>
           {loading ? (
             <Text style={styles.statusText}>
@@ -161,12 +183,33 @@ export default function ScanScreen() {
             </Text>
           )}
 
-          <TouchableOpacity
-            style={styles.manualBtn}
-            onPress={() => setManualVisible(true)}
-          >
-            <Text style={styles.manualBtnText}>Enter manually</Text>
-          </TouchableOpacity>
+          {/* Grocery mode button row */}
+          {scanMode === 'grocery' && !loading && !error && (
+            <View style={styles.buttonRow}>
+              <TouchableOpacity
+                style={styles.manualBtn}
+                onPress={() => console.log('scan label tapped')}
+              >
+                <Text style={styles.manualBtnText}>Scan label</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.manualBtn}
+                onPress={() => setManualVisible(true)}
+              >
+                <Text style={styles.manualBtnText}>Enter manually</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          {/* Fallback manual button when loading or error */}
+          {(loading || !!error) && (
+            <TouchableOpacity
+              style={styles.manualBtn}
+              onPress={() => setManualVisible(true)}
+            >
+              <Text style={styles.manualBtnText}>Enter manually</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -216,6 +259,43 @@ export default function ScanScreen() {
           </View>
         </KeyboardAvoidingView>
       </Modal>
+
+      {/* Upgrade modal */}
+      <Modal
+        visible={showUpgradeModal}
+        animationType="slide"
+        transparent
+        onRequestClose={() => {
+          setShowUpgradeModal(false);
+          setScanMode('grocery');
+        }}
+      >
+        <View style={styles.upgradeOverlay}>
+          <View style={styles.upgradeSheet}>
+            <Text style={styles.upgradeTitle}>Restaurant scanning</Text>
+            <Text style={styles.upgradeBody}>
+              Photograph any menu and fufu will check every dish against your household profiles. Available on the Household plan.
+            </Text>
+            <TouchableOpacity
+              style={styles.upgradePrimaryBtn}
+              onPress={() => {
+                console.log('upgrade tapped');
+                setShowUpgradeModal(false);
+              }}
+            >
+              <Text style={styles.upgradePrimaryText}>Upgrade to Household — €7.99/mo</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setShowUpgradeModal(false);
+                setScanMode('grocery');
+              }}
+            >
+              <Text style={styles.upgradeLaterText}>Maybe later</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -243,6 +323,38 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0,0,0,0.35)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 6,
+  },
+  chipRow: {
+    position: 'absolute',
+    top: '18%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    gap: 10,
+    zIndex: 10,
+  },
+  chipActive: {
+    backgroundColor: '#F3E9DA',
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  chipInactive: {
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(243,233,218,0.5)',
+  },
+  chipTextActive: {
+    fontFamily: 'Inter_500Medium',
+    fontSize: 14,
+    color: '#0F172A',
+  },
+  chipTextInactive: {
+    fontFamily: 'Inter_500Medium',
+    fontSize: 14,
+    color: 'rgba(243,233,218,0.7)',
   },
   viewfinderContainer: {
     alignSelf: 'center',
@@ -313,6 +425,10 @@ const styles = StyleSheet.create({
     color: COLOURS.SCAN_INFO,
     fontSize: 14,
     fontWeight: '500',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    gap: 12,
   },
   manualBtn: {
     borderWidth: 1,
@@ -414,5 +530,45 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: COLOURS.WHITE,
     fontWeight: '600',
+  },
+  upgradeOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  },
+  upgradeSheet: {
+    backgroundColor: '#F6EFE4',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    padding: 24,
+    gap: 16,
+  },
+  upgradeTitle: {
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 22,
+    color: '#0F172A',
+  },
+  upgradeBody: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 15,
+    color: '#334155',
+    lineHeight: 22,
+  },
+  upgradePrimaryBtn: {
+    backgroundColor: '#0F172A',
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  upgradePrimaryText: {
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 16,
+    color: '#FFFFFF',
+  },
+  upgradeLaterText: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 14,
+    color: '#64748B',
+    textAlign: 'center',
   },
 });
