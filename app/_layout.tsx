@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { Tabs } from 'expo-router';
+import HouseholdIcon from '../components/icons/HouseholdIcon';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import {
@@ -20,9 +21,6 @@ function ScanIcon({ color }: { color: string }) {
   return <Text style={{ fontSize: 20, color }}>⬛</Text>;
 }
 
-function HouseholdIcon({ color }: { color: string }) {
-  return <Text style={{ fontSize: 20, color }}>👥</Text>;
-}
 
 function SettingsIcon({ color }: { color: string }) {
   return <Text style={{ fontSize: 20, color }}>⚙</Text>;
@@ -77,7 +75,7 @@ export default function RootLayout() {
         name="profiles"
         options={{
           title: 'Household',
-          tabBarIcon: ({ color }) => <HouseholdIcon color={color} />,
+          tabBarIcon: ({ color }) => <HouseholdIcon color={color} size={24} />,
         }}
       />
       <Tabs.Screen
