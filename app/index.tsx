@@ -227,7 +227,8 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   wordmark: {
     fontFamily: 'Fraunces_600SemiBold',
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
     letterSpacing: -1.5,
     textAlign: 'center',
     position: 'absolute',
-    top: '16%',
+    top: '12%',
     alignSelf: 'center',
     zIndex: 10,
     textShadowColor: 'rgba(0,0,0,0.35)',
@@ -280,6 +281,10 @@ const styles = StyleSheet.create({
     borderRightWidth: CORNER_WIDTH,
   },
   bottomContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: 'rgba(0,0,0,0.65)', // semi-transparent overlay — no token
     paddingTop: 20,
     paddingBottom: 44,
