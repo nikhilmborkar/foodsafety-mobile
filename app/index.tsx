@@ -24,6 +24,7 @@ const CORNER_WIDTH = 3;
 export default function ScanScreen() {
   const [permission, requestPermission] = useCameraPermissions();
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [cameraKey, setCameraKey] = useState(0);
   const [manualVisible, setManualVisible] = useState(false);
   const [manualBarcode, setManualBarcode] = useState('');
   const scanLocked = useRef(false);
@@ -40,6 +41,12 @@ export default function ScanScreen() {
         })
         .catch(() => setProfiles([]));
     }, [reset])
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      setCameraKey((k) => k + 1);
+    }, [])
   );
 
   function navigateResult(result: EvaluateResponse | InconclusiveResult) {
@@ -112,6 +119,7 @@ export default function ScanScreen() {
   return (
     <View style={styles.container}>
       <CameraView
+        key={cameraKey}
         style={StyleSheet.absoluteFill}
         facing="back"
         barcodeScannerSettings={{
