@@ -63,6 +63,7 @@ export default function ScanScreen() {
           state: 'INCONCLUSIVE',
           product_id: r.product_id,
           product_name: r.product_name,
+          inconclusive_reason: (r as any).inconclusive_reason,
         },
       });
     } else {

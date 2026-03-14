@@ -21,10 +21,11 @@ type ResultParams = {
   product_id?: string;
   product_name?: string;
   source?: string;
+  inconclusive_reason?: string;
 };
 
 export default function ResultScreen() {
-  const { data, state, product_id, product_name, source } = useLocalSearchParams<ResultParams>();
+  const { data, state, product_id, product_name, source, inconclusive_reason } = useLocalSearchParams<ResultParams>();
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [profilesLoading, setProfilesLoading] = useState(true);
@@ -39,6 +40,13 @@ export default function ResultScreen() {
   }, []);
 
   const handleScanAnother = () => router.replace('/');
+
+  const reasonText =
+    inconclusive_reason === 'Product not found in Open Food Facts'
+      ? "This product isn't in our database yet. Try scanning the ingredient label instead."
+      : inconclusive_reason === 'Unable to analyze product data'
+      ? "We found this product but couldn't read its ingredients. Try scanning the label."
+      : "We don't have enough ingredient data to complete this safety check.";
 
   if (state === 'INCONCLUSIVE') {
     return (
@@ -62,16 +70,14 @@ export default function ResultScreen() {
               <Text style={styles.inconclusiveDiamondText}>◆</Text>
             </View>
             <Text style={styles.inconclusiveHeadline}>Analysis incomplete</Text>
-            <Text style={styles.inconclusiveBody}>
-              We don't have enough ingredient data to complete this safety check.
-            </Text>
+            <Text style={styles.inconclusiveBody}>{reasonText}</Text>
           </View>
 
-          <TouchableOpacity style={styles.inconclusivePrimaryBtn} onPress={handleScanAnother}>
+          <TouchableOpacity style={styles.inconclusivePrimaryBtn} onPress={() => router.push('/scan-label')}>
             <Text style={styles.inconclusivePrimaryText}>Scan ingredient list</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.inconclusiveSecondaryBtn} onPress={handleScanAnother}>
-            <Text style={styles.inconclusiveSecondaryText}>Scan another product</Text>
+            <Text style={styles.inconclusiveSecondaryText}>Try a different barcode</Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeScreen>
