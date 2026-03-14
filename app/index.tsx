@@ -288,7 +288,8 @@ export default function ScanScreen() {
               <Text style={styles.upgradeFeatureLine}>✓ Scan restaurant menus</Text>
               <Text style={styles.upgradeFeatureLine}>✓ Scan history</Text>
               <Text style={styles.upgradeFeatureLine}>✓ Advanced safety verification</Text>
-              <Text style={styles.upgradeFeatureLine}>✓ Recall & safety alerts — from babies to fur babies</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Recall & safety alerts</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Family coverage, from babies to fur babies</Text>
             </View>
 
             <TouchableOpacity
