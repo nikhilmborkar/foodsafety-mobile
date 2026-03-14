@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../utils/runOcr';
 import { API_BASE_URL } from '../constants/api';
 import { EvaluateResponse, Profile } from '../types';
 
 export default function ScanLabelScreen() {
+  const insets = useSafeAreaInsets();
   const [permission, requestPermission] = useCameraPermissions();
   const [capturing, setCapturing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -112,7 +114,7 @@ export default function ScanLabelScreen() {
       <CameraView ref={cameraRef} style={StyleSheet.absoluteFill} facing="back" />
 
       {/* Top bar */}
-      <SafeAreaView style={styles.topBar}>
+      <SafeAreaView style={[styles.topBar, { paddingTop: insets.top + 12 }]}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Text style={styles.backText}>←</Text>
         </TouchableOpacity>

@@ -11,6 +11,7 @@ import { Profile } from '../types';
 import { EU14_ALLERGENS } from '../constants/allergens';
 import { COLOURS } from '../constants/colours';
 import { AGE_GROUP_LABELS } from '../constants/ageGroups';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Props {
   initial?: Partial<Profile>;
@@ -44,6 +45,7 @@ const DIET_OPTIONS = ['None', 'Vegan', 'Vegetarian', 'Pescatarian'];
 const FAITH_OPTIONS = ['None', 'Halal', 'Kosher', 'Hindu'];
 
 export function ProfileForm({ initial, onSave, onCancel }: Props) {
+  const insets = useSafeAreaInsets();
   const [name, setName] = useState(initial?.Profile_Name ?? '');
   const [type, setType] = useState<'Human' | 'Pet'>(
     initial?.Profile_Type ?? 'Human'
@@ -103,7 +105,7 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
   };
 
   return (
-    <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+    <ScrollView style={[styles.container, { paddingTop: insets.top + 12 }]} keyboardShouldPersistTaps="handled">
       <Text style={styles.label}>Name</Text>
       <TextInput
         style={styles.input}

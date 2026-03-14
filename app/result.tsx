@@ -14,6 +14,7 @@ import { EvaluateResponse, Profile } from '../types';
 import { MemberCard } from '../components/MemberCard';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type ResultParams = {
   data?: string;
@@ -24,6 +25,7 @@ type ResultParams = {
 };
 
 export default function ResultScreen() {
+  const insets = useSafeAreaInsets();
   const { data, state, product_id, product_name, source } = useLocalSearchParams<ResultParams>();
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -42,7 +44,7 @@ export default function ResultScreen() {
 
   if (state === 'INCONCLUSIVE') {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { paddingTop: insets.top + 12 }]}>
         <ScrollView contentContainerStyle={styles.content}>
           {(product_name || product_id) && (
             <View style={styles.header}>
@@ -80,7 +82,7 @@ export default function ResultScreen() {
 
   if (!data) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { paddingTop: insets.top + 12 }]}>
         <Text style={styles.errorText}>No result data.</Text>
         <TouchableOpacity style={styles.scanAgainBtn} onPress={handleScanAnother}>
           <Text style={styles.scanAgainText}>Scan another</Text>
@@ -94,7 +96,7 @@ export default function ResultScreen() {
     result = JSON.parse(data) as EvaluateResponse;
   } catch {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { paddingTop: insets.top + 12 }]}>
         <Text style={styles.errorText}>Failed to parse result.</Text>
         <TouchableOpacity style={styles.scanAgainBtn} onPress={handleScanAnother}>
           <Text style={styles.scanAgainText}>Scan another</Text>
