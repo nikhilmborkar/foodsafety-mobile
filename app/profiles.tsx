@@ -14,7 +14,7 @@ import { ProfileList } from '../components/ProfileList';
 import { Profile } from '../types';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets, SafeAreaView as SafeAreaViewRN } from 'react-native-safe-area-context';
 
 export default function ProfilesScreen() {
   const insets = useSafeAreaInsets();
@@ -75,13 +75,15 @@ export default function ProfilesScreen() {
         presentationStyle="pageSheet"
         onRequestClose={handleCancel}
       >
-        <SafeAreaView style={styles.modal}>
-          <ProfileForm
-            initial={editing ?? undefined}
-            onSave={handleSave}
-            onCancel={handleCancel}
-          />
-        </SafeAreaView>
+        <SafeAreaViewRN style={{ flex: 1 }}>
+          <View style={styles.modal}>
+            <ProfileForm
+              initial={editing ?? undefined}
+              onSave={handleSave}
+              onCancel={handleCancel}
+            />
+          </View>
+        </SafeAreaViewRN>
       </Modal>
     </SafeAreaView>
   );
