@@ -276,7 +276,7 @@ export default function ScanScreen() {
         }}
       >
         <View style={styles.upgradeOverlay}>
-          <View style={styles.upgradeSheet}>
+          <View style={[styles.upgradeSheet, { paddingBottom: insets.bottom + 24 }]}>
             <Text style={styles.upgradeTitle}>Unlock restaurant scanning</Text>
             <Text style={styles.upgradeBody}>
               Photograph any menu and fufu checks every dish against your household profiles.
@@ -597,7 +597,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 14,
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 6,
     width: '100%',
   },
   upgradePrimaryText: {
