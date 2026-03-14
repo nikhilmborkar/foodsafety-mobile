@@ -349,6 +349,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '6%',
   },
   wordmark: {
     fontFamily: 'Fraunces_600SemiBold',

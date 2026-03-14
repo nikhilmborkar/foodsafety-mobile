@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { Tabs } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import {
@@ -26,6 +27,7 @@ function SettingsIcon({ color }: { color: string }) {
 }
 
 export default function RootLayout() {
+  const insets = useSafeAreaInsets();
   const [fontsLoaded] = useFonts({
     PlusJakartaSans_600SemiBold,
     PlusJakartaSans_700Bold,
@@ -51,9 +53,9 @@ export default function RootLayout() {
         tabBarStyle: {
           backgroundColor: '#A3B18A',
           borderTopWidth: 0,
-          height: 80,
           paddingTop: 10,
-          paddingBottom: 16,
+          paddingBottom: insets.bottom + 12,
+          height: 68 + insets.bottom,
           elevation: 0,
           shadowOpacity: 0,
         },
