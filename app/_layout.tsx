@@ -5,10 +5,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import {
-  PlusJakartaSans_600SemiBold,
-  PlusJakartaSans_700Bold,
-} from '@expo-google-fonts/plus-jakarta-sans';
-import {
   Inter_400Regular,
   Inter_500Medium,
 } from '@expo-google-fonts/inter';
@@ -29,8 +25,6 @@ function SettingsIcon({ color }: { color: string }) {
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
   const [fontsLoaded] = useFonts({
-    PlusJakartaSans_600SemiBold,
-    PlusJakartaSans_700Bold,
     Inter_400Regular,
     Inter_500Medium,
     Fraunces_600SemiBold,

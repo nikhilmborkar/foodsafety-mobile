@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     ...TYPOGRAPHY.subheading,
+    fontFamily: 'Fraunces_600SemiBold',
     fontSize: 20,
     fontWeight: '700',
     color: COLOURS.TEXT_PRIMARY,
