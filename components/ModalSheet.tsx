@@ -10,7 +10,7 @@ interface Props {
 export function ModalSheet({ children }: Props) {
   const insets = useSafeAreaInsets();
   return (
-    <View style={[styles.sheet, { paddingBottom: Math.max(insets.bottom, 16) }]}>
+    <View style={[styles.sheet, { paddingBottom: Math.max(insets.bottom, 28) }]}>
       {children}
     </View>
   );
