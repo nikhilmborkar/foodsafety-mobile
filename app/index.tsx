@@ -613,7 +613,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#64748B',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 8,
   },
   upgradeLaterText: {
     fontFamily: 'Inter_400Regular',
