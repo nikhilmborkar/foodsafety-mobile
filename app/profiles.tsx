@@ -76,11 +76,6 @@ export default function ProfilesScreen() {
         onRequestClose={handleCancel}
       >
         <SafeAreaView style={styles.modal}>
-          <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>
-              {editing ? 'Edit member' : 'Add member'}
-            </Text>
-          </View>
           <ProfileForm
             initial={editing ?? undefined}
             onSave={handleSave}

@@ -105,7 +105,13 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
   };
 
   return (
-    <ScrollView style={[styles.container, { paddingTop: insets.top + 12 }]} keyboardShouldPersistTaps="handled">
+    <>
+      <View style={[styles.formHeader, { paddingTop: insets.top + 12 }]}>
+        <Text style={styles.formTitle}>
+          {initial?.Profile_ID ? 'Edit member' : 'Add member'}
+        </Text>
+      </View>
+      <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
       <Text style={styles.label}>Name</Text>
       <TextInput
         style={styles.input}
@@ -310,10 +316,22 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  formHeader: {
+    paddingHorizontal: 20,
+    paddingBottom: 8,
+    backgroundColor: COLOURS.BACKGROUND,
+  },
+  formTitle: {
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLOURS.TEXT_PRIMARY,
+  },
   container: {
     flex: 1,
     padding: 16,
