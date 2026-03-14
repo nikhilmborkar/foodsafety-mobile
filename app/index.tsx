@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useFocusEffect, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEvaluate, InconclusiveResult } from '../hooks/useEvaluate';
 import { Profile, EvaluateResponse } from '../types';
@@ -32,6 +33,7 @@ export default function ScanScreen() {
   const scanLocked = useRef(false);
   const router = useRouter();
   const { loading, slow, error, evaluate, reset } = useEvaluate();
+  const insets = useSafeAreaInsets();
 
   useFocusEffect(
     useCallback(() => {
@@ -227,7 +229,7 @@ export default function ScanScreen() {
           style={styles.modalContainer}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-          <View style={styles.manualModal}>
+          <View style={[styles.manualModal, { paddingBottom: insets.bottom + 20 }]}>
             <Text style={styles.manualTitle}>Enter barcode</Text>
             <TextInput
               style={styles.manualInput}
