@@ -158,7 +158,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.BACKGROUND,
   },
   content: {
-    padding: 16,
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 8,
   },
   header: {
     flexDirection: 'row',
