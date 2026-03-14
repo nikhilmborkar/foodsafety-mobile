@@ -282,50 +282,25 @@ export default function ScanScreen() {
               Photograph any menu and fufu checks every dish against your household profiles.
             </Text>
 
-            {/* Two-tier card row */}
-            <View style={styles.cardRow}>
-              {/* Household card */}
-              <View style={styles.householdCard}>
-                <Text style={styles.householdTierLabel}>HOUSEHOLD</Text>
-                <View style={styles.priceRow}>
-                  <Text style={styles.householdPrice}>€7.99</Text>
-                  <Text style={styles.householdPerMonth}>/mo</Text>
-                </View>
-                <Text style={styles.householdFeature}>✓  Scan any ingredient label</Text>
-                <Text style={styles.householdFeature}>✓  Scan restaurant menus</Text>
-                <Text style={styles.householdFeature}>✓  Scan history</Text>
-                <TouchableOpacity
-                  style={styles.householdBtn}
-                  onPress={() => console.log('household tapped')}
-                >
-                  <Text style={styles.householdBtnText}>Get Household</Text>
-                </TouchableOpacity>
-              </View>
-
-              {/* Guardian card */}
-              <View style={styles.guardianCard}>
-                <View style={styles.bestValueBadge}>
-                  <Text style={styles.bestValueText}>BEST VALUE</Text>
-                </View>
-                <Text style={styles.guardianTierLabel}>GUARDIAN</Text>
-                <View style={styles.priceRow}>
-                  <Text style={styles.guardianPrice}>€11.99</Text>
-                  <Text style={styles.guardianPerMonth}>/mo</Text>
-                </View>
-                <Text style={styles.guardianFeature}>✓  Scan labels & restaurant menus</Text>
-                <Text style={styles.guardianFeature}>✓  Scan history</Text>
-                <Text style={styles.guardianFeature}>✓  Advanced safety verification</Text>
-                <Text style={styles.guardianFeature}>✓  Recall & safety alerts — humans & pets</Text>
-                <TouchableOpacity
-                  style={styles.guardianBtn}
-                  onPress={() => console.log('guardian tapped')}
-                >
-                  <Text style={styles.guardianBtnText}>Get Guardian</Text>
-                </TouchableOpacity>
-              </View>
+            {/* Feature list */}
+            <View style={styles.upgradeFeatureList}>
+              <Text style={styles.upgradeFeatureLine}>✓ Scan ingredient labels</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Scan restaurant menus</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Scan history</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Advanced safety verification</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Recall & safety alerts — humans & pets</Text>
             </View>
 
-            <Text style={styles.annualNote}>€59.99/yr Household · €94.99/yr Guardian — save 35% with annual billing</Text>
+            <TouchableOpacity
+              style={styles.upgradePrimaryBtn}
+              onPress={() => router.push('/auth')}
+            >
+              <Text style={styles.upgradePrimaryText}>Continue</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => router.push('/auth')}>
+              <Text style={styles.upgradeSignInText}>Already have an account? Sign in</Text>
+            </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => {
@@ -600,7 +575,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Fraunces_600SemiBold',
     fontSize: 22,
     color: '#0F172A',
-    marginBottom: 6,
+    marginBottom: 8,
   },
   upgradeBody: {
     fontFamily: 'Inter_400Regular',
@@ -608,125 +583,39 @@ const styles = StyleSheet.create({
     color: '#334155',
     marginBottom: 20,
   },
+  upgradeFeatureList: {
+    marginBottom: 24,
+    gap: 10,
+  },
+  upgradeFeatureLine: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 14,
+    color: '#0F172A',
+  },
+  upgradePrimaryBtn: {
+    backgroundColor: '#0F172A',
+    borderRadius: 10,
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginBottom: 12,
+    width: '100%',
+  },
+  upgradePrimaryText: {
+    fontFamily: 'Fraunces_600SemiBold',
+    fontSize: 16,
+    color: '#F3E9DA',
+  },
+  upgradeSignInText: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 14,
+    color: '#64748B',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
   upgradeLaterText: {
     fontFamily: 'Inter_400Regular',
     fontSize: 14,
     color: '#64748B',
     textAlign: 'center',
-  },
-  cardRow: {
-    flexDirection: 'row',
-    marginBottom: 14,
-  },
-  householdCard: {
-    flex: 1,
-    backgroundColor: '#F3E9DA',
-    borderWidth: 1,
-    borderColor: '#A3B18A',
-    borderRadius: 12,
-    padding: 14,
-    marginRight: 10,
-  },
-  householdTierLabel: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 14,
-    color: '#64748B',
-    marginBottom: 4,
-  },
-  priceRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    marginBottom: 12,
-  },
-  householdPrice: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 26,
-    color: '#0F172A',
-  },
-  householdPerMonth: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: '#64748B',
-    marginBottom: 3,
-    marginLeft: 2,
-  },
-  householdFeature: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 12,
-    color: '#334155',
-    marginBottom: 6,
-  },
-  householdBtn: {
-    backgroundColor: '#0F172A',
-    borderRadius: 8,
-    paddingVertical: 11,
-    alignItems: 'center',
-  },
-  householdBtnText: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 13,
-    color: '#F3E9DA',
-  },
-  guardianCard: {
-    flex: 1,
-    backgroundColor: '#0F172A',
-    borderRadius: 12,
-    padding: 14,
-  },
-  bestValueBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#A3B18A',
-    borderRadius: 4,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    marginBottom: 4,
-  },
-  bestValueText: {
-    fontFamily: 'Inter_500Medium',
-    fontSize: 10,
-    color: '#0F172A',
-    letterSpacing: 0.3,
-  },
-  guardianTierLabel: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 14,
-    color: 'rgba(243,233,218,0.6)',
-    marginBottom: 4,
-  },
-  guardianPrice: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 26,
-    color: '#F3E9DA',
-  },
-  guardianPerMonth: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: 'rgba(243,233,218,0.5)',
-    marginBottom: 3,
-    marginLeft: 2,
-  },
-  guardianFeature: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 12,
-    color: 'rgba(243,233,218,0.85)',
-    marginBottom: 6,
-  },
-  guardianBtn: {
-    backgroundColor: '#F3E9DA',
-    borderRadius: 8,
-    paddingVertical: 11,
-    alignItems: 'center',
-  },
-  guardianBtnText: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 13,
-    color: '#0F172A',
-  },
-  annualNote: {
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: '#64748B',
-    textAlign: 'center',
-    marginBottom: 16,
   },
 });
