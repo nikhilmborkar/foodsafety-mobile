@@ -1,15 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { COLOURS } from '../constants/colours';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeScreen } from '../components/SafeScreen';
 
 export default function AuthScreen() {
   const router = useRouter();
-  const insets = useSafeAreaInsets();
-
   return (
-    <SafeAreaView style={[styles.container, { paddingTop: insets.top + 12 }]}>
+    <SafeScreen>
       <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
         <Text style={styles.backText}>← Back</Text>
       </TouchableOpacity>
@@ -17,7 +15,7 @@ export default function AuthScreen() {
         <Text style={styles.title}>Create account</Text>
         <Text style={styles.body}>Account setup coming soon.</Text>
       </View>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 

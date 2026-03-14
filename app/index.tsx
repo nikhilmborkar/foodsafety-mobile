@@ -18,6 +18,7 @@ import { useEvaluate, InconclusiveResult } from '../hooks/useEvaluate';
 import { Profile, EvaluateResponse } from '../types';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
+import { ModalSheet } from '../components/ModalSheet';
 
 const CORNER_SIZE = 26;
 const CORNER_WIDTH = 3;
@@ -276,7 +277,7 @@ export default function ScanScreen() {
         }}
       >
         <View style={styles.upgradeOverlay}>
-          <View style={[styles.upgradeSheet, { paddingBottom: insets.bottom + 24 }]}>
+          <ModalSheet>
             <Text style={styles.upgradeTitle}>Unlock restaurant scanning</Text>
             <Text style={styles.upgradeBody}>
               Point your camera at any menu. fufu checks every dish against your household's allergies, diets, and faith-based requirements - instantly.
@@ -311,7 +312,7 @@ export default function ScanScreen() {
             >
               <Text style={styles.upgradeLaterText}>Maybe later</Text>
             </TouchableOpacity>
-          </View>
+          </ModalSheet>
         </View>
       </Modal>
     </View>

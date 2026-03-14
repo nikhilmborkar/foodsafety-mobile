@@ -9,14 +9,13 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeScreen } from '../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../utils/runOcr';
 import { API_BASE_URL } from '../constants/api';
 import { EvaluateResponse, Profile } from '../types';
 
 export default function ScanLabelScreen() {
-  const insets = useSafeAreaInsets();
   const [permission, requestPermission] = useCameraPermissions();
   const [capturing, setCapturing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -110,17 +109,17 @@ export default function ScanLabelScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeScreen edges={['top']}>
       <CameraView ref={cameraRef} style={StyleSheet.absoluteFill} facing="back" />
 
       {/* Top bar */}
-      <SafeAreaView style={[styles.topBar, { paddingTop: insets.top + 12 }]}>
+      <View style={styles.topBar}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Text style={styles.backText}>←</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Point camera at ingredient label</Text>
         <View style={styles.backBtn} />
-      </SafeAreaView>
+      </View>
 
       {/* Error message */}
       {errorMsg && !capturing && (
@@ -143,7 +142,7 @@ export default function ScanLabelScreen() {
           <TouchableOpacity style={styles.captureBtn} onPress={handleCapture} />
         </View>
       )}
-    </View>
+    </SafeScreen>
   );
 }
 
