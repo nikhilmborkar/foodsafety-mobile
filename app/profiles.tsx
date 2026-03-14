@@ -75,8 +75,8 @@ export default function ProfilesScreen() {
         presentationStyle="pageSheet"
         onRequestClose={handleCancel}
       >
-        <SafeAreaViewRN style={{ flex: 1 }}>
-          <View style={styles.modal}>
+        <SafeAreaViewRN style={{ flex: 1, backgroundColor: COLOURS.BACKGROUND }}>
+          <View style={[styles.modal, { backgroundColor: COLOURS.BACKGROUND }]}>
             <ProfileForm
               initial={editing ?? undefined}
               onSave={handleSave}
