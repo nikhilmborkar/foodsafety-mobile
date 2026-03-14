@@ -20,10 +20,11 @@ type ResultParams = {
   state?: string;
   product_id?: string;
   product_name?: string;
+  source?: string;
 };
 
 export default function ResultScreen() {
-  const { data, state, product_id, product_name } = useLocalSearchParams<ResultParams>();
+  const { data, state, product_id, product_name, source } = useLocalSearchParams<ResultParams>();
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [profilesLoading, setProfilesLoading] = useState(true);
@@ -116,6 +117,9 @@ export default function ResultScreen() {
           <View style={styles.headerLeft}>
             <Text style={styles.productName}>{result.product_name}</Text>
             <Text style={styles.productId}>{result.product_id}</Text>
+            {source === 'ocr_label' && (
+              <Text style={styles.ocrBadge}>📷 Scanned from label</Text>
+            )}
           </View>
         </View>
 
@@ -176,6 +180,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: COLOURS.TEXT_FAINT,
     marginTop: 2,
+  },
+  ocrBadge: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 12,
+    color: '#64748B',
+    marginTop: 4,
   },
   lowConfidenceBanner: {
     backgroundColor: COLOURS.LOW_CONF_BG,

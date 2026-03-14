@@ -104,6 +104,12 @@ export default function RootLayout() {
           tabBarButton: () => null,
         }}
       />
+      <Tabs.Screen
+        name="scan-label"
+        options={{
+          tabBarButton: () => null,
+        }}
+      />
     </Tabs>
   );
 }

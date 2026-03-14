@@ -188,7 +188,7 @@ export default function ScanScreen() {
             <View style={styles.buttonRow}>
               <TouchableOpacity
                 style={styles.manualBtn}
-                onPress={() => console.log('scan label tapped')}
+                onPress={() => router.push('/scan-label')}
               >
                 <Text style={styles.manualBtnText}>Scan label</Text>
               </TouchableOpacity>
