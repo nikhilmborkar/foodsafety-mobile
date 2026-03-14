@@ -157,6 +157,15 @@ export default function ScanScreen() {
           <View style={[styles.corner, styles.cornerBR]} />
         </View>
 
+        {/* Instruction text below scanner brackets */}
+        {!loading && !error && (
+          <Text style={styles.instructionText}>
+            {profiles.length === 0
+              ? 'Set up household to scan'
+              : 'Point camera at barcode'}
+          </Text>
+        )}
+
         {/* Bottom status + controls */}
         <View style={styles.bottomContainer}>
           {loading ? (
@@ -175,13 +184,7 @@ export default function ScanScreen() {
                 <Text style={styles.retryText}>Tap to retry</Text>
               </TouchableOpacity>
             </View>
-          ) : (
-            <Text style={styles.statusText}>
-              {profiles.length === 0
-                ? 'Set up household to scan'
-                : 'Point camera at barcode'}
-            </Text>
-          )}
+          ) : null}
 
           {/* Grocery mode button row */}
           {scanMode === 'grocery' && !loading && !error && (
@@ -363,7 +366,7 @@ const styles = StyleSheet.create({
   },
   chipRow: {
     position: 'absolute',
-    top: '18%',
+    top: '22%',
     alignSelf: 'center',
     flexDirection: 'row',
     gap: 10,
@@ -440,6 +443,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     gap: 16,
+  },
+  instructionText: {
+    ...TYPOGRAPHY.body,
+    color: COLOURS.WHITE,
+    fontSize: 15,
+    textAlign: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '62%',
+    zIndex: 10,
   },
   statusText: {
     ...TYPOGRAPHY.body,
