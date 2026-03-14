@@ -42,7 +42,7 @@ export default function ResultScreen() {
 
   if (state === 'INCONCLUSIVE') {
     return (
-      <SafeScreen>
+      <SafeScreen edges={['top']}>
         <ScrollView contentContainerStyle={styles.content}>
           {(product_name || product_id) && (
             <View style={styles.header}>
@@ -80,7 +80,7 @@ export default function ResultScreen() {
 
   if (!data) {
     return (
-      <SafeScreen>
+      <SafeScreen edges={['top']}>
         <Text style={styles.errorText}>No result data.</Text>
         <TouchableOpacity style={styles.scanAgainBtn} onPress={handleScanAnother}>
           <Text style={styles.scanAgainText}>Scan another</Text>
@@ -94,7 +94,7 @@ export default function ResultScreen() {
     result = JSON.parse(data) as EvaluateResponse;
   } catch {
     return (
-      <SafeScreen>
+      <SafeScreen edges={['top']}>
         <Text style={styles.errorText}>Failed to parse result.</Text>
         <TouchableOpacity style={styles.scanAgainBtn} onPress={handleScanAnother}>
           <Text style={styles.scanAgainText}>Scan another</Text>
@@ -111,7 +111,7 @@ export default function ResultScreen() {
   };
 
   return (
-    <SafeScreen>
+    <SafeScreen edges={['top']}>
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
