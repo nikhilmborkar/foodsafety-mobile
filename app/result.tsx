@@ -73,7 +73,7 @@ export default function ResultScreen() {
             <Text style={styles.inconclusiveBody}>{reasonText}</Text>
           </View>
 
-          <TouchableOpacity style={styles.inconclusivePrimaryBtn} onPress={() => router.push('/scan-label')}>
+          <TouchableOpacity style={styles.inconclusivePrimaryBtn} onPress={() => router.replace('/scan-label')}>
             <Text style={styles.inconclusivePrimaryText}>Scan ingredient list</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.inconclusiveSecondaryBtn} onPress={handleScanAnother}>

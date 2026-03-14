@@ -37,4 +37,5 @@ export interface EvaluateResponse {
   product_name: string;
   scan_log_id?: number | null;
   evaluations: EvaluationOutput[];
+  inconclusive_reason?: string;
 }
