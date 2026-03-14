@@ -279,7 +279,7 @@ export default function ScanScreen() {
           <View style={[styles.upgradeSheet, { paddingBottom: insets.bottom + 24 }]}>
             <Text style={styles.upgradeTitle}>Unlock restaurant scanning</Text>
             <Text style={styles.upgradeBody}>
-              Photograph any menu and fufu checks every dish against your household profiles.
+              Point your camera at any menu. fufu checks every dish against your household's allergies, diets, and faith requirements, instantly.
             </Text>
 
             {/* Feature list */}
@@ -288,7 +288,7 @@ export default function ScanScreen() {
               <Text style={styles.upgradeFeatureLine}>✓ Scan restaurant menus</Text>
               <Text style={styles.upgradeFeatureLine}>✓ Scan history</Text>
               <Text style={styles.upgradeFeatureLine}>✓ Advanced safety verification</Text>
-              <Text style={styles.upgradeFeatureLine}>✓ Recall & safety alerts — humans & pets</Text>
+              <Text style={styles.upgradeFeatureLine}>✓ Recall & safety alerts — from babies to fur babies</Text>
             </View>
 
             <TouchableOpacity
