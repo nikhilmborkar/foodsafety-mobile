@@ -279,7 +279,7 @@ export default function ScanScreen() {
           <View style={[styles.upgradeSheet, { paddingBottom: insets.bottom + 24 }]}>
             <Text style={styles.upgradeTitle}>Unlock restaurant scanning</Text>
             <Text style={styles.upgradeBody}>
-              Point your camera at any menu. fufu checks every dish against your household's allergies, diets, and faith requirements, instantly.
+              Point your camera at any menu. fufu checks every dish against your household's allergies, diets, and faith-based requirements - instantly.
             </Text>
 
             {/* Feature list */}
