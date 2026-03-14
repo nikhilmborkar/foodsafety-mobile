@@ -318,6 +318,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.BACKGROUND,
   },
   label: {
+    fontFamily: 'Inter_500Medium',
     fontSize: 13,
     fontWeight: '600',
     color: COLOURS.TEXT_MID,
@@ -327,6 +328,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   input: {
+    fontFamily: 'Inter_400Regular',
     borderWidth: 1,
     borderColor: COLOURS.BORDER,
     borderRadius: 8,
@@ -353,11 +355,13 @@ const styles = StyleSheet.create({
     borderColor: COLOURS.PRIMARY,
   },
   segmentText: {
+    fontFamily: 'Inter_500Medium',
     fontSize: 14,
     color: COLOURS.TEXT_MID,
     fontWeight: '500',
   },
   segmentTextActive: {
+    fontFamily: 'Inter_500Medium',
     color: COLOURS.WHITE,
     fontWeight: '600',
   },
@@ -379,14 +383,17 @@ const styles = StyleSheet.create({
     borderColor: COLOURS.PRIMARY,
   },
   chipText: {
+    fontFamily: 'Inter_500Medium',
     fontSize: 13,
     color: COLOURS.TEXT_MID,
   },
   chipTextActive: {
+    fontFamily: 'Inter_500Medium',
     color: COLOURS.WHITE,
     fontWeight: '600',
   },
   helperText: {
+    fontFamily: 'Inter_400Regular',
     fontSize: 12,
     color: COLOURS.TEXT_SECONDARY,
     marginBottom: 6,
@@ -400,6 +407,7 @@ const styles = StyleSheet.create({
     borderLeftColor: COLOURS.INFO_ACCENT,
   },
   lifeStageNoteText: {
+    fontFamily: 'Inter_400Regular',
     fontSize: 13,
     color: COLOURS.INFO_TEXT,
     lineHeight: 18,
@@ -413,6 +421,7 @@ const styles = StyleSheet.create({
     borderLeftColor: COLOURS.WARN,
   },
   toxinNoteText: {
+    fontFamily: 'Inter_400Regular',
     fontSize: 13,
     color: COLOURS.WARN_TEXT,
     lineHeight: 18,
@@ -432,6 +441,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cancelText: {
+    fontFamily: 'Inter_500Medium',
     fontSize: 15,
     color: COLOURS.TEXT_MID,
     fontWeight: '500',
@@ -447,6 +457,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.TEXT_FAINT,
   },
   saveText: {
+    fontFamily: 'Inter_500Medium',
     fontSize: 15,
     color: COLOURS.WHITE,
     fontWeight: '600',
