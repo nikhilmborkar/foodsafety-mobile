@@ -32,10 +32,10 @@ const AGE_GROUPS: { value: Profile['Age_Group']; label: string }[] = [
 ];
 
 const LIFE_STAGE_NOTES: Partial<Record<Profile['Age_Group'], string>> = {
-  YoungInfant_0_6m:  '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
-  OlderInfant_7_12m: '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
-  Baby_0_12m:        '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
-  Toddler_1_3y:      '⚠️ Automatic safety rules apply for this age group — honey, alcohol, choking hazards',
+  YoungInfant_0_6m:  'Honey, alcohol, raw egg and unpasteurised cheese are flagged automatically for this age group.',
+  OlderInfant_7_12m: 'Honey, alcohol, whole nuts and added salt are flagged automatically for this age group.',
+  Baby_0_12m:        'Honey, alcohol, raw egg and unpasteurised cheese are flagged automatically for this age group.',
+  Toddler_1_3y:      'Alcohol, whole nuts and high caffeine are flagged automatically for this age group.',
   Pregnant:          '⚠️ Pregnancy safety rules apply — alcohol, raw fish, unpasteurised cheese, caffeine',
   Breastfeeding:     '⚠️ Breastfeeding rules apply — alcohol and caffeine flagged automatically',
 };
