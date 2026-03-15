@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   manualModal: {
-    backgroundColor: COLOURS.SURFACE,
+    backgroundColor: '#F3E9DA',
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     padding: 24,
