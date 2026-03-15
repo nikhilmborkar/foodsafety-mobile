@@ -140,11 +140,11 @@ export default function ResultScreen() {
                 style={{ marginRight: 6 }}
               />
               <Text style={styles.limitedDataBannerTitle}>
-                Limited ingredient data available
+                Limited ingredient data
               </Text>
             </View>
             <Text style={styles.limitedDataBannerBody}>
-              Results may be incomplete. Confirm the product label.
+              Results may be incomplete — always confirm the label.
             </Text>
           </View>
         )}
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#A3B18A',
     borderRadius: 8,
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 14,
     marginBottom: 12,
   },
