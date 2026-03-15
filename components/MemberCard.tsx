@@ -90,13 +90,6 @@ export function MemberCard({ profileName, evaluation, scanLogId }: Props) {
         </View>
       )}
 
-      {evaluation.Confidence_Score < 50 && (
-        <View style={styles.lowConfidence}>
-          <Text style={styles.lowConfidenceText}>
-            Limited product data — confirm before use
-          </Text>
-        </View>
-      )}
     </View>
   );
 }
@@ -151,17 +144,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLOURS.TEXT_MID,
     marginTop: 4,
-  },
-  lowConfidence: {
-    marginTop: 10,
-    backgroundColor: COLOURS.LOW_CONF_BG,
-    borderRadius: 6,
-    padding: 8,
-  },
-  lowConfidenceText: {
-    ...TYPOGRAPHY.body,
-    fontSize: 12,
-    color: COLOURS.TEXT_SECONDARY,
   },
   disclaimer: {
     ...TYPOGRAPHY.body,

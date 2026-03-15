@@ -14,6 +14,7 @@ import { MemberCard } from '../components/MemberCard';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
 import { SafeScreen } from '../components/SafeScreen';
+import { Feather } from '@expo/vector-icons';
 
 type ResultParams = {
   data?: string;
@@ -131,8 +132,19 @@ export default function ResultScreen() {
 
         {hasLowConfidence && (
           <View style={styles.limitedDataBanner}>
-            <Text style={styles.limitedDataBannerText}>
-              Limited product data — confirm before use
+            <View style={styles.limitedDataBannerHeader}>
+              <Feather
+                name="alert-triangle"
+                size={14}
+                color="#64748B"
+                style={{ marginRight: 6 }}
+              />
+              <Text style={styles.limitedDataBannerTitle}>
+                Limited ingredient data available
+              </Text>
+            </View>
+            <Text style={styles.limitedDataBannerBody}>
+              Results may be incomplete. Confirm the product label.
             </Text>
           </View>
         )}
@@ -204,11 +216,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     marginBottom: 12,
   },
-  limitedDataBannerText: {
-    fontFamily: 'Inter_400Regular',
+  limitedDataBannerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 2,
+  },
+  limitedDataBannerTitle: {
+    fontFamily: 'Inter_500Medium',
     fontSize: 13,
     color: '#64748B',
-    textAlign: 'center',
+    lineHeight: 16,
+  },
+  limitedDataBannerBody: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 12,
+    color: '#64748B',
+    lineHeight: 16,
   },
   errorText: {
     ...TYPOGRAPHY.body,
