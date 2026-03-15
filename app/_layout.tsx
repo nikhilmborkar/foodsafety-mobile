@@ -91,25 +91,25 @@ export default function RootLayout() {
       <Tabs.Screen
         name="scan"
         options={{
-          tabBarButton: () => null,
+          href: null,
         }}
       />
       <Tabs.Screen
         name="result"
         options={{
-          tabBarButton: () => null,
+          href: null,
         }}
       />
       <Tabs.Screen
         name="scan-label"
         options={{
-          tabBarButton: () => null,
+          href: null,
         }}
       />
       <Tabs.Screen
         name="auth"
         options={{
-          tabBarButton: () => null,
+          href: null,
         }}
       />
     </Tabs>
