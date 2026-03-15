@@ -31,3 +31,27 @@ export const EU14_ALLERGENS = [
   { id: 'lupin',          label: 'Lupin' },
   { id: 'molluscs',       label: 'Molluscs (squid, mussels, oysters)' },
 ] as const;
+
+export const PET_DOG_ALLERGENS = [
+  { id: 'chicken',        label: 'Chicken / Poultry' },
+  { id: 'beef',           label: 'Beef' },
+  { id: 'lamb',           label: 'Lamb' },
+  { id: 'pork',           label: 'Pork' },
+  { id: 'fish',           label: 'Fish / Seafood' },
+  { id: 'milk',           label: 'Dairy / Milk' },
+  { id: 'eggs',           label: 'Eggs' },
+  { id: 'soybeans',       label: 'Soy' },
+  { id: 'gluten_cereals', label: 'Wheat / Gluten' },
+  { id: 'corn',           label: 'Corn / Maize' },
+] as const;
+
+export const PET_CAT_ALLERGENS = [
+  { id: 'fish',           label: 'Fish / Seafood' },
+  { id: 'chicken',        label: 'Chicken / Poultry' },
+  { id: 'beef',           label: 'Beef' },
+  { id: 'milk',           label: 'Dairy / Milk' },
+  { id: 'eggs',           label: 'Eggs' },
+  { id: 'soybeans',       label: 'Soy' },
+  { id: 'gluten_cereals', label: 'Wheat / Gluten' },
+  { id: 'corn',           label: 'Corn / Maize' },
+] as const;

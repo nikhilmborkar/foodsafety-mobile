@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Profile } from '../types';
-import { EU14_ALLERGENS } from '../constants/allergens';
+import { EU14_ALLERGENS, PET_DOG_ALLERGENS, PET_CAT_ALLERGENS } from '../constants/allergens';
 import { COLOURS } from '../constants/colours';
 import { AGE_GROUP_LABELS } from '../constants/ageGroups';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -71,6 +71,13 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
   );
   const [diet, setDiet] = useState(initial?.Diet_Preference ?? 'None');
   const [faith, setFaith] = useState(initial?.Faith_Ruleset ?? 'None');
+
+  const availableAllergens =
+    type === 'Pet'
+      ? species === 'Dog'
+        ? PET_DOG_ALLERGENS
+        : PET_CAT_ALLERGENS
+      : EU14_ALLERGENS;
 
   const toggleItem = (
     list: string[],
@@ -218,9 +225,13 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
       </View>
 
       <Text style={styles.label}>Allergens — Block (Contains)</Text>
-      <Text style={styles.helperText}>Select allergens as labelled on EU food packaging</Text>
+      <Text style={styles.helperText}>
+        {type === 'Pet'
+          ? 'Select ingredients your pet is allergic to.'
+          : 'Select allergens as labelled on EU food packaging'}
+      </Text>
       <View style={styles.chipRow}>
-        {EU14_ALLERGENS.map(a => (
+        {availableAllergens.map(a => (
           <TouchableOpacity
             key={a.id}
             style={[
@@ -242,9 +253,13 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
       </View>
 
       <Text style={styles.label}>Allergens — Block (May Contain / PAL)</Text>
-      <Text style={styles.helperText}>Select allergens as labelled on EU food packaging</Text>
+      <Text style={styles.helperText}>
+        {type === 'Pet'
+          ? 'Ingredients to flag as caution for your pet.'
+          : 'Select allergens as labelled on EU food packaging'}
+      </Text>
       <View style={styles.chipRow}>
-        {EU14_ALLERGENS.map(a => (
+        {availableAllergens.map(a => (
           <TouchableOpacity
             key={a.id}
             style={[
