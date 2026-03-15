@@ -19,6 +19,7 @@ import { Profile, EvaluateResponse } from '../types';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
 import { ModalSheet } from '../components/ModalSheet';
+import { OnboardingSheet } from '../components/OnboardingSheet';
 
 const CORNER_SIZE = 26;
 const CORNER_WIDTH = 3;
@@ -31,6 +32,7 @@ export default function ScanScreen() {
   const [manualBarcode, setManualBarcode] = useState('');
   const [scanMode, setScanMode] = useState<'grocery' | 'restaurant'>('grocery');
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const scanLocked = useRef(false);
   const router = useRouter();
   const { loading, slow, error, evaluate, reset } = useEvaluate();
@@ -42,7 +44,9 @@ export default function ScanScreen() {
       reset();
       AsyncStorage.getItem('household_profiles')
         .then(raw => {
-          setProfiles(raw ? (JSON.parse(raw) as Profile[]) : []);
+          const loaded: Profile[] = raw ? (JSON.parse(raw) as Profile[]) : [];
+          setProfiles(loaded);
+          if (loaded.length === 0) setShowOnboarding(true);
         })
         .catch(() => setProfiles([]));
     }, [reset])
@@ -98,6 +102,11 @@ export default function ScanScreen() {
       scanLocked.current = false;
     }
   };
+
+  function handleOnboardingComplete(profile: Profile) {
+    setProfiles(prev => [...prev, profile]);
+    setShowOnboarding(false);
+  }
 
   if (!permission) {
     return <View style={styles.container} />;
@@ -266,6 +275,12 @@ export default function ScanScreen() {
           </View>
         </KeyboardAvoidingView>
       </Modal>
+
+      {/* Onboarding sheet */}
+      <OnboardingSheet
+        visible={showOnboarding}
+        onComplete={handleOnboardingComplete}
+      />
 
       {/* Upgrade modal */}
       <Modal
