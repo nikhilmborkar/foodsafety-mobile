@@ -130,8 +130,8 @@ export default function ResultScreen() {
         </View>
 
         {hasLowConfidence && (
-          <View style={styles.lowConfidenceBanner}>
-            <Text style={styles.lowConfidenceBannerText}>
+          <View style={styles.limitedDataBanner}>
+            <Text style={styles.limitedDataBannerText}>
               Limited product data — confirm before use
             </Text>
           </View>
@@ -195,16 +195,19 @@ const styles = StyleSheet.create({
     color: '#64748B',
     marginTop: 4,
   },
-  lowConfidenceBanner: {
-    backgroundColor: COLOURS.LOW_CONF_BG,
+  limitedDataBanner: {
+    backgroundColor: '#F6EFE4',
+    borderWidth: 1,
+    borderColor: '#A3B18A',
     borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    marginBottom: 12,
   },
-  lowConfidenceBannerText: {
-    ...TYPOGRAPHY.body,
+  limitedDataBannerText: {
+    fontFamily: 'Inter_400Regular',
     fontSize: 13,
-    color: COLOURS.TEXT_SECONDARY,
+    color: '#64748B',
     textAlign: 'center',
   },
   errorText: {
