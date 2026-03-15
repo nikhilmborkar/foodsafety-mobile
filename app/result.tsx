@@ -144,7 +144,7 @@ export default function ResultScreen() {
               </Text>
             </View>
             <Text style={styles.limitedDataBannerBody}>
-              Results may be incomplete — always confirm the label.
+              {"Results may be incomplete.\nConfirm the product label before consuming."}
             </Text>
           </View>
         )}
