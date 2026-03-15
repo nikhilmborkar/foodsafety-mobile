@@ -106,6 +106,12 @@ export default function RootLayout() {
           tabBarButton: () => null,
         }}
       />
+      <Tabs.Screen
+        name="auth"
+        options={{
+          tabBarButton: () => null,
+        }}
+      />
     </Tabs>
   );
 }
