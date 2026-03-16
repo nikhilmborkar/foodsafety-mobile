@@ -60,7 +60,7 @@ export default function ResultScreen() {
                   <Text style={styles.productName}>{product_name}</Text>
                 ) : null}
                 {product_id ? (
-                  <Text style={styles.productId}>{product_id}</Text>
+                  <Text style={styles.productId}>Barcode: {product_id?.replace(/^OFF-/, '')}</Text>
                 ) : null}
               </View>
             </View>
@@ -123,7 +123,7 @@ export default function ResultScreen() {
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Text style={styles.productName}>{result.product_name}</Text>
-            <Text style={styles.productId}>{result.product_id}</Text>
+            <Text style={styles.productId}>Barcode: {result.product_id?.replace(/^OFF-/, '')}</Text>
             {source === 'ocr_label' && (
               <Text style={styles.ocrBadge}>📷 Scanned from label</Text>
             )}
