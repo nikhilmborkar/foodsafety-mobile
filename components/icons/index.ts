@@ -1,0 +1,8 @@
+export { default as ScannerIcon } from './ScannerIcon'
+export { default as HistoryIcon } from './HistoryIcon'
+export { default as SettingsIcon } from './SettingsIcon'
+export { default as HouseholdIcon } from './HouseholdIcon'
+export { default as ShieldAlertIcon } from './ShieldAlertIcon'
+export { default as InfoIcon } from './InfoIcon'
+export { default as WarningIcon } from './WarningIcon'
+export { default as CustomerCareIcon } from './CustomerCareIcon'

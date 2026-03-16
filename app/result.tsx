@@ -14,7 +14,7 @@ import { MemberCard } from '../components/MemberCard';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
 import { SafeScreen } from '../components/SafeScreen';
-import { Feather } from '@expo/vector-icons';
+import { WarningIcon } from '../components/icons';
 
 type ResultParams = {
   data?: string;
@@ -133,12 +133,9 @@ export default function ResultScreen() {
         {hasLowConfidence && (
           <View style={styles.limitedDataBanner}>
             <View style={styles.limitedDataBannerHeader}>
-              <Feather
-                name="alert-triangle"
-                size={14}
-                color="#64748B"
-                style={{ marginRight: 6 }}
-              />
+              <View style={{ marginRight: 6 }}>
+                <WarningIcon size={13} color="#64748B" strokeWidth={1.5} />
+              </View>
               <Text style={styles.limitedDataBannerTitle}>
                 Limited ingredient data
               </Text>

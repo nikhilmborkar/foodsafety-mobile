@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
@@ -9,18 +8,13 @@ import {
   Inter_500Medium,
 } from '@expo-google-fonts/inter';
 import { Fraunces_600SemiBold } from '@expo-google-fonts/fraunces';
-import { COLOURS } from '../constants/colours';
+import {
+  ScannerIcon,
+  HouseholdIcon,
+  SettingsIcon,
+} from '../components/icons';
 
 SplashScreen.preventAutoHideAsync();
-
-function ScanIcon({ color }: { color: string }) {
-  return <Text style={{ fontSize: 24, lineHeight: 28, color }}>⬛</Text>;
-}
-
-
-function SettingsIcon({ color }: { color: string }) {
-  return <Text style={{ fontSize: 24, lineHeight: 28, color }}>⚙</Text>;
-}
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
@@ -62,7 +56,7 @@ export default function RootLayout() {
         tabBarInactiveTintColor: 'rgba(15,23,42,0.4)',
         tabBarLabelStyle: {
           fontFamily: 'Inter_500Medium',
-          fontSize: 12,
+          fontSize: 11,
           marginTop: 2,
         },
       }}
@@ -71,21 +65,38 @@ export default function RootLayout() {
         name="index"
         options={{
           title: 'Scan',
-          tabBarIcon: ({ color }) => <ScanIcon color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <ScannerIcon
+              size={22}
+              color={focused ? '#0F172A' : 'rgba(15,23,42,0.4)'}
+              strokeWidth={focused ? 2 : 1.5}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="profiles"
         options={{
           title: 'Household',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, lineHeight: 28, color }}>👥</Text>,
+          tabBarIcon: ({ focused }) => (
+            <HouseholdIcon
+              size={22}
+              color={focused ? '#0F172A' : 'rgba(15,23,42,0.4)'}
+              strokeWidth={focused ? 2 : 1.5}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => <SettingsIcon color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <SettingsIcon
+              size={22}
+              color={focused ? '#0F172A' : 'rgba(15,23,42,0.4)'}
+            />
+          ),
         }}
       />
       <Tabs.Screen
