@@ -1,14 +1,14 @@
 {
   "expo": {
     "name": "fufu",
-    "slug": "fufu",
+    "slug": "foodsafety-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#F3E9DA"
     },
     "ios": {
@@ -26,14 +26,18 @@
       },
       "predictiveBackGestureEnabled": false,
       "permissions": [
-        "android.permission.CAMERA"
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ],
       "package": "com.fufuapp.fufu"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "scheme": "foodsafety",
     "plugins": [
       "expo-router",
@@ -55,6 +59,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/cc5e0293-220f-4db7-b94c-11ad1f7ce7c4"
-    }
+    },
+    "owner": "nikhilborkar"
   }
 }

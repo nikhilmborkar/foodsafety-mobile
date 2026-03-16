@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
+import { useIsFocused } from '@react-navigation/native';
 import { SafeScreen } from '../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../utils/runOcr';
@@ -21,6 +22,18 @@ export default function ScanLabelScreen() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const cameraRef = useRef<CameraView>(null);
   const router = useRouter();
+  const isFocused = useIsFocused();
+  // Tracks whether the screen is currently active so async callbacks can
+  // guard state updates after the screen has lost focus.
+  const focusedRef = useRef(isFocused);
+
+  useEffect(() => {
+    focusedRef.current = isFocused;
+    if (isFocused) {
+      setCapturing(false);
+      setErrorMsg(null);
+    }
+  }, [isFocused]);
 
   const handleCapture = async () => {
     if (capturing || !cameraRef.current) return;
@@ -34,6 +47,8 @@ export default function ScanLabelScreen() {
         base64: false,
       });
 
+      if (!focusedRef.current) return;
+
       if (!photo) {
         setErrorMsg('Could not capture photo. Try again.');
         setCapturing(false);
@@ -42,6 +57,8 @@ export default function ScanLabelScreen() {
 
       // 2. Run OCR
       const text = await runOcr(photo.uri);
+
+      if (!focusedRef.current) return;
 
       if (!text) {
         setErrorMsg('Label not readable. Try better lighting or move closer.');
@@ -58,6 +75,8 @@ export default function ScanLabelScreen() {
         // proceed with empty profiles
       }
 
+      if (!focusedRef.current) return;
+
       // 4. POST to /ocr-evaluate
       const response = await fetch(`${API_BASE_URL}/ocr-evaluate`, {
         method: 'POST',
@@ -69,6 +88,8 @@ export default function ScanLabelScreen() {
         }),
       });
 
+      if (!focusedRef.current) return;
+
       if (!response.ok) {
         setErrorMsg('Server error. Please try again.');
         setCapturing(false);
@@ -76,6 +97,8 @@ export default function ScanLabelScreen() {
       }
 
       const result: EvaluateResponse = await response.json();
+
+      if (!focusedRef.current) return;
 
       // 5. Navigate to result — same pattern as barcode scan
       router.push({
@@ -86,6 +109,7 @@ export default function ScanLabelScreen() {
         },
       });
     } catch {
+      if (!focusedRef.current) return;
       setErrorMsg('Something went wrong. Please try again.');
       setCapturing(false);
     }
