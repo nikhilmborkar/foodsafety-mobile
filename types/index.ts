@@ -5,7 +5,7 @@ export interface Profile {
   Profile_Name: string;
   Profile_Type: 'Human' | 'Pet';
   Pet_Species: 'Dog' | 'Cat' | 'N/A';
-  Age_Group: 'YoungInfant_0_6m' | 'OlderInfant_7_12m' | 'Baby_0_12m' | 'Toddler_1_3y' | 'Child' | 'Teen' | 'Adult' | 'Senior' | 'Pregnant' | 'Breastfeeding';
+  Age_Group: 'YoungInfant_0_6m' | 'OlderInfant_7_12m' | 'Toddler_1_3y' | 'Child' | 'Teen' | 'Adult' | 'Senior' | 'Pregnant' | 'Breastfeeding';
   Sensitivity_Level: 'Strict' | 'Normal';
   Allergen_Framework: 'EU14';
   Allergen_Token_Version: 'EU14_v1';

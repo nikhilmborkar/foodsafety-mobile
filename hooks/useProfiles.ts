@@ -4,6 +4,17 @@ import { Profile } from '../types';
 
 const STORAGE_KEY = 'household_profiles';
 
+// Migrate legacy Age_Group values from older app installs.
+// Baby_0_12m was split into YoungInfant_0_6m / OlderInfant_7_12m.
+// We map it to OlderInfant_7_12m (7–12m rules are the safer superset).
+function migrateProfile(raw: unknown): Profile {
+  const p = raw as Profile & { Age_Group: string };
+  if ((p.Age_Group as string) === 'Baby_0_12m') {
+    return { ...p, Age_Group: 'OlderInfant_7_12m' };
+  }
+  return p as Profile;
+}
+
 export function useProfiles() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(false);
@@ -12,7 +23,20 @@ export function useProfiles() {
     setLoading(true);
     try {
       const raw = await AsyncStorage.getItem(STORAGE_KEY);
-      setProfiles(raw ? (JSON.parse(raw) as Profile[]) : []);
+      if (!raw) {
+        setProfiles([]);
+        return;
+      }
+      const rawItems = JSON.parse(raw) as unknown[];
+      const parsed = rawItems.map(migrateProfile);
+      // Persist back if any profile was migrated so the fix is stored.
+      const anyMigrated = parsed.some(
+        (p, i) => p.Age_Group !== (rawItems[i] as Profile).Age_Group
+      );
+      if (anyMigrated) {
+        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)).catch(() => {});
+      }
+      setProfiles(parsed);
     } catch {
       setProfiles([]);
     } finally {
