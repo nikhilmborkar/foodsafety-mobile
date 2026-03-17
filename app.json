@@ -14,6 +14,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.fufuapp.fufu",
+      "usesAppleSignIn": true,
       "infoPlist": {
         "NSCameraUsageDescription": "fufu needs camera access to scan product barcodes and ingredient labels.",
         "NSPhotoLibraryUsageDescription": "fufu needs photo library access to scan ingredient labels from saved images."
@@ -38,7 +39,7 @@
       "ios",
       "android"
     ],
-    "scheme": "foodsafety",
+    "scheme": ["foodsafety", "fufu"],
     "plugins": [
       "expo-router",
       [
@@ -46,7 +47,8 @@
         {
           "cameraPermission": "fufu needs camera access to scan product barcodes and ingredient labels."
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "extra": {
       "router": {},

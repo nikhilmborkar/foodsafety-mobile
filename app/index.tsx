@@ -71,7 +71,7 @@ export default function ScanScreen() {
         },
       });
     } else {
-      router.push({ pathname: '/result', params: { data: JSON.stringify(result) } });
+      router.push({ pathname: '/result-tier1', params: { data: JSON.stringify(result) } });
     }
   }
 

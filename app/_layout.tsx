@@ -112,6 +112,13 @@ export default function RootLayout() {
           href: null,
         }}
       />
+
+      <Tabs.Screen
+        name="(camera)"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
