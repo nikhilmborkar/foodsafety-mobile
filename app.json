@@ -17,7 +17,8 @@
       "usesAppleSignIn": true,
       "infoPlist": {
         "NSCameraUsageDescription": "fufu needs camera access to scan product barcodes and ingredient labels.",
-        "NSPhotoLibraryUsageDescription": "fufu needs photo library access to scan ingredient labels from saved images."
+        "NSPhotoLibraryUsageDescription": "fufu needs photo library access to scan ingredient labels from saved images.",
+        "NSUserNotificationsUsageDescription": "fufu will notify you about product recalls and household safety alerts."
       }
     },
     "android": {
@@ -48,7 +49,15 @@
           "cameraPermission": "fufu needs camera access to scan product barcodes and ingredient labels."
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#0F172A",
+          "sounds": []
+        }
+      ]
     ],
     "extra": {
       "router": {},
