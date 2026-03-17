@@ -105,18 +105,7 @@ export default function RootLayout() {
           href: null,
         }}
       />
-      <Tabs.Screen
-        name="result"
-        options={{
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        name="scan-label"
-        options={{
-          href: null,
-        }}
-      />
+
       <Tabs.Screen
         name="auth"
         options={{
