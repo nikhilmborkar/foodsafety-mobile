@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import * as Updates from 'expo-updates';
 import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
@@ -18,6 +19,23 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    if (__DEV__) return;
+
+    (async () => {
+      try {
+        const update = await Updates.checkForUpdateAsync();
+        if (update.isAvailable) {
+          await Updates.fetchUpdateAsync();
+          await Updates.reloadAsync();
+        }
+      } catch {
+        // silent fail
+      }
+    })();
+  }, []);
+
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,

@@ -58,7 +58,9 @@
     },
     "runtimeVersion": "1.0.0",
     "updates": {
-      "url": "https://u.expo.dev/cc5e0293-220f-4db7-b94c-11ad1f7ce7c4"
+      "url": "https://u.expo.dev/cc5e0293-220f-4db7-b94c-11ad1f7ce7c4",
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 3000
     },
     "owner": "nikhilborkar"
   }
