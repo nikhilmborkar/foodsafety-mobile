@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
-  SafeAreaView,
   ScrollView,
 } from 'react-native';
 import { useProfiles } from '../hooks/useProfiles';
@@ -14,10 +13,10 @@ import { ProfileList } from '../components/ProfileList';
 import { Profile } from '../types';
 import { COLOURS } from '../constants/colours';
 import { TYPOGRAPHY } from '../constants/typography';
-import { useSafeAreaInsets, SafeAreaView as SafeAreaViewRN } from 'react-native-safe-area-context';
+import { SafeAreaView as SafeAreaViewRN } from 'react-native-safe-area-context';
+import { SafeScreen } from '../components/SafeScreen';
 
 export default function ProfilesScreen() {
-  const insets = useSafeAreaInsets();
   const { profiles, load, addProfile, updateProfile, deleteProfile } =
     useProfiles();
   const [showForm, setShowForm] = useState(false);
@@ -48,9 +47,9 @@ export default function ProfilesScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeScreen edges={['top']} style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={[styles.header, { paddingTop: insets.top + 12 }]}>
+        <View style={[styles.header, { paddingTop: 12 }]}>
           <Text style={styles.wordmark}>fufu</Text>
           <TouchableOpacity
             style={styles.addBtn}
@@ -85,7 +84,7 @@ export default function ProfilesScreen() {
           </View>
         </SafeAreaViewRN>
       </Modal>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 
