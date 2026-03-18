@@ -65,11 +65,17 @@ export default function ScanScreen() {
   );
 
   const pathname = usePathname();
+  const prevPathname = useRef(pathname);
 
   useEffect(() => {
-    if (pathname === '/' && scanLocked.current) {
-      setCameraKey((k) => k + 1);
-      scanLocked.current = false;
+    const wasOnScanLabel = prevPathname.current.includes('scan-label');
+    prevPathname.current = pathname;
+
+    if (pathname === '/') {
+      if (scanLocked.current || wasOnScanLabel) {
+        if (scanLocked.current) scanLocked.current = false;
+        setCameraKey((k) => k + 1);
+      }
     }
   }, [pathname]);
 
