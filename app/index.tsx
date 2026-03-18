@@ -41,7 +41,9 @@ export default function ScanScreen() {
   useFocusEffect(
     useCallback(() => {
       let cancelled = false;
-
+      if (scanLocked.current) {
+        setCameraKey((k) => k + 1);
+      }
       scanLocked.current = false;
       reset();
       AsyncStorage.getItem('household_profiles')
@@ -60,15 +62,6 @@ export default function ScanScreen() {
         cancelled = true;
       };
     }, [reset])
-  );
-
-  useFocusEffect(
-    useCallback(() => {
-      if (scanLocked.current) {
-        scanLocked.current = false;
-        setCameraKey((k) => k + 1);
-      }
-    }, [])
   );
 
   function navigateResult(result: EvaluateResponse | InconclusiveResult) {
