@@ -26,8 +26,12 @@ export default function ScanLabelScreen() {
 
   useFocusEffect(
     React.useCallback(() => {
+      focusedRef.current = true;
       setCapturing(false);
       setErrorMsg(null);
+      return () => {
+        focusedRef.current = false;
+      };
     }, [])
   );
 

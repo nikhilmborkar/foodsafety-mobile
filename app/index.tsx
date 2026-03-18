@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useFocusEffect, useRouter, usePathname } from 'expo-router';
+import { useIsFocused } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeScreen } from '../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -67,18 +68,16 @@ export default function ScanScreen() {
   );
 
   const pathname = usePathname();
-  const prevPathname = useRef(pathname);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    const onScanLabel = pathname.startsWith('/scan-label');
-    setCameraActive(!onScanLabel);
-  }, [pathname]);
+    setCameraActive(isFocused && pathname === '/');
+  }, [isFocused, pathname]);
 
   useEffect(() => {
     if (pathname.startsWith('/scan-label')) {
       visitedScanLabel.current = true;
     }
-    prevPathname.current = pathname;
 
     if (pathname === '/') {
       if (scanLocked.current || visitedScanLabel.current) {
