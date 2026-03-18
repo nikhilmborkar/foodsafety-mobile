@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  Animated,
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
@@ -20,6 +21,7 @@ export default function ScanLabelScreen() {
   const [capturing, setCapturing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [cameraReady, setCameraReady] = useState(false);
+  const opacity = useRef(new Animated.Value(0)).current;
   const cameraRef = useRef<CameraView>(null);
   const router = useRouter();
   // Guards async callbacks during the brief exit transition window.
@@ -40,11 +42,19 @@ export default function ScanLabelScreen() {
     React.useCallback(() => {
       const timeout = setTimeout(() => {
         setCameraReady(true);
+
+        // Premium smooth fade-in
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 180,
+          useNativeDriver: true,
+        }).start();
       }, 80);
 
       return () => {
         clearTimeout(timeout);
         setCameraReady(false);
+        opacity.setValue(0);
       };
     }, [])
   );
@@ -149,13 +159,25 @@ export default function ScanLabelScreen() {
 
   return (
     <SafeScreen edges={['top']}>
-      {cameraReady && (
-        <CameraView
-          ref={cameraRef}
-          style={StyleSheet.absoluteFill}
-          facing="back"
-        />
-      )}
+      <>
+        {/* Base layer prevents visual flash */}
+        <View style={[StyleSheet.absoluteFill, styles.cameraBase]} />
+
+        {cameraReady && (
+          <Animated.View
+            style={[
+              StyleSheet.absoluteFill,
+              { opacity }
+            ]}
+          >
+            <CameraView
+              ref={cameraRef}
+              style={StyleSheet.absoluteFill}
+              facing="back"
+            />
+          </Animated.View>
+        )}
+      </>
 
       {/* Top bar */}
       <View style={styles.topBar}>
@@ -194,6 +216,9 @@ export default function ScanLabelScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000',
+  },
+  cameraBase: {
     backgroundColor: '#000',
   },
   topBar: {
