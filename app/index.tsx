@@ -62,6 +62,15 @@ export default function ScanScreen() {
     }, [reset])
   );
 
+  useFocusEffect(
+    useCallback(() => {
+      if (scanLocked.current) {
+        scanLocked.current = false;
+        setCameraKey((k) => k + 1);
+      }
+    }, [])
+  );
+
   function navigateResult(result: EvaluateResponse | InconclusiveResult) {
     if ((result as InconclusiveResult).inconclusive) {
       const r = result as InconclusiveResult;
