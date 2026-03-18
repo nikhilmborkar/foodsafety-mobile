@@ -60,12 +60,12 @@ export function ProfileForm({ initial, onSave, onCancel }: Props) {
   );
   const [allergyContains, setAllergyContains] = useState<string[]>(
     initial?.Allergy_Block_Contains
-      ? initial.Allergy_Block_Contains.split(';').filter(Boolean)
+      ? (typeof initial.Allergy_Block_Contains === 'string' ? initial.Allergy_Block_Contains : '').split(';').filter(Boolean)
       : []
   );
   const [allergyPAL, setAllergyPAL] = useState<string[]>(
     initial?.Allergy_Block_PAL
-      ? initial.Allergy_Block_PAL.split(';').filter(Boolean)
+      ? (typeof initial.Allergy_Block_PAL === 'string' ? initial.Allergy_Block_PAL : '').split(';').filter(Boolean)
       : []
   );
   const [diet, setDiet] = useState(initial?.Diet_Preference ?? 'None');

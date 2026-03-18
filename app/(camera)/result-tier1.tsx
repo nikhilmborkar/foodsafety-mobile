@@ -43,7 +43,9 @@ export default function ResultTier1Screen() {
     setProductName(result.product_name ?? '');
     setProductId(result.product_id ?? '');
     setScanLogId(result.scan_log_id ?? null);
-    setHasLowConfidence(result.evaluations.some(e => e.Confidence_Score < 50));
+    setHasLowConfidence(
+      (Array.isArray(result.evaluations) ? result.evaluations : []).some(e => e.Confidence_Score < 50)
+    );
 
     AsyncStorage.getItem('household_profiles')
       .then(raw => {

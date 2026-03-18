@@ -19,7 +19,9 @@ function profileSummary(profile: Profile): string {
   } else {
     parts.push(AGE_GROUP_LABELS[profile.Age_Group] ?? profile.Age_Group);
   }
-  const allergens = profile.Allergy_Block_Contains.split(';').filter(Boolean);
+  const allergens = (typeof profile.Allergy_Block_Contains === 'string'
+    ? profile.Allergy_Block_Contains
+    : '').split(';').filter(Boolean);
   if (allergens.length > 0) {
     const labels = allergens.map(key => ALLERGEN_LABELS[key] ?? key);
     const shown = labels.slice(0, 2).join(', ');

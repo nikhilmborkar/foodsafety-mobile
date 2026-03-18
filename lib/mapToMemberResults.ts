@@ -6,7 +6,15 @@ export function mapToMemberResults(
   response: EvaluateResponse,
   profiles: Profile[]
 ): MemberResult[] {
-  const results: MemberResult[] = response.evaluations.map(evaluation => {
+  const evaluations = Array.isArray(response.evaluations)
+    ? response.evaluations
+    : [];
+
+  if (!Array.isArray(response.evaluations)) {
+    console.warn('[fufu] mapToMemberResults: invalid evaluations', response);
+  }
+
+  const results: MemberResult[] = evaluations.map(evaluation => {
     const profile = profiles.find(p => p.Profile_ID === evaluation.Profile_ID);
     const memberName = profile?.Profile_Name ?? evaluation.Profile_ID;
     const verdict = (evaluation.Outcome as Verdict) ?? 'INCONCLUSIVE';

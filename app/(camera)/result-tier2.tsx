@@ -47,7 +47,9 @@ export default function ResultTier2Screen() {
     }
 
     setResult(parsed);
-    setHasLowConfidence(parsed.evaluations.some(e => e.Confidence_Score < 50));
+    setHasLowConfidence(
+      (Array.isArray(parsed.evaluations) ? parsed.evaluations : []).some(e => e.Confidence_Score < 50)
+    );
 
     AsyncStorage.getItem('household_profiles')
       .then(raw => {
@@ -85,7 +87,7 @@ export default function ResultTier2Screen() {
   if (!result) return <SafeScreen edges={['top']}>{null}</SafeScreen>;
 
   const evaluationMap = Object.fromEntries(
-    result.evaluations.map(e => [e.Profile_ID, e])
+    (Array.isArray(result.evaluations) ? result.evaluations : []).map(e => [e.Profile_ID, e])
   );
 
   return (
