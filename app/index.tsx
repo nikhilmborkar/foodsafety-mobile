@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { useFocusEffect, useRouter } from 'expo-router';
+import { useFocusEffect, useRouter, usePathname } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SafeScreen } from '../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,6 +63,15 @@ export default function ScanScreen() {
       };
     }, [reset])
   );
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname === '/' && scanLocked.current) {
+      setCameraKey((k) => k + 1);
+      scanLocked.current = false;
+    }
+  }, [pathname]);
 
   function navigateResult(result: EvaluateResponse | InconclusiveResult) {
     if ((result as InconclusiveResult).inconclusive) {
