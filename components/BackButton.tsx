@@ -13,6 +13,7 @@ export function BackButton({ onPress, variant }: Props) {
       style={[styles.btn, variant === 'dark' ? styles.btnDark : styles.btnLight]}
       onPress={onPress}
       activeOpacity={0.7}
+      hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
     >
       <Text style={[styles.chevron, variant === 'dark' ? styles.chevronDark : styles.chevronLight]}>
         ‹
