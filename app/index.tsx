@@ -34,26 +34,41 @@ export default function ScanScreen() {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const scanLocked = useRef(false);
+  const hasFocused = useRef(false);
   const router = useRouter();
   const { loading, slow, error, evaluate, reset } = useEvaluate();
   const insets = useSafeAreaInsets();
 
   useFocusEffect(
     useCallback(() => {
+      let cancelled = false;
+
       scanLocked.current = false;
       reset();
       AsyncStorage.getItem('household_profiles')
         .then(raw => {
+          if (cancelled) return;
           const loaded: Profile[] = raw ? (JSON.parse(raw) as Profile[]) : [];
           setProfiles(loaded);
           if (loaded.length === 0) setShowOnboarding(true);
         })
-        .catch(() => setProfiles([]));
+        .catch(() => {
+          if (cancelled) return;
+          setProfiles([]);
+        });
+
+      return () => {
+        cancelled = true;
+      };
     }, [reset])
   );
 
   useFocusEffect(
     useCallback(() => {
+      if (!hasFocused.current) {
+        hasFocused.current = true;
+        return;
+      }
       setCameraKey((k) => k + 1);
     }, [])
   );
