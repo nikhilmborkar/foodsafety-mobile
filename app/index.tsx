@@ -8,11 +8,11 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeScreen } from '../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEvaluate, InconclusiveResult } from '../hooks/useEvaluate';
 import { Profile, EvaluateResponse } from '../types';
@@ -114,19 +114,20 @@ export default function ScanScreen() {
 
   if (!permission.granted) {
     return (
-      <SafeAreaView style={styles.permissionScreen}>
+      <SafeScreen edges={['top']} style={styles.permissionScreen}>
         <Text style={styles.permissionText}>
           Camera access is needed to scan barcodes.
         </Text>
         <TouchableOpacity style={styles.permissionBtn} onPress={requestPermission}>
           <Text style={styles.permissionBtnText}>Allow Camera</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </SafeScreen>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <SafeScreen edges={['top']}>
+      <View style={styles.container}>
       <CameraView
         key={cameraKey}
         style={StyleSheet.absoluteFill}
@@ -331,7 +332,8 @@ export default function ScanScreen() {
           </ModalSheet>
         </View>
       </Modal>
-    </View>
+      </View>
+    </SafeScreen>
   );
 }
 

@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-  SafeAreaView,
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
@@ -119,14 +118,14 @@ export default function ScanLabelScreen() {
 
   if (!permission.granted) {
     return (
-      <SafeAreaView style={styles.permissionScreen}>
+      <SafeScreen edges={['top']} style={styles.permissionScreen}>
         <Text style={styles.permissionText}>
           Camera access is needed to scan ingredient labels.
         </Text>
         <TouchableOpacity style={styles.permissionBtn} onPress={requestPermission}>
           <Text style={styles.permissionBtnText}>Allow Camera</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </SafeScreen>
     );
   }
 
