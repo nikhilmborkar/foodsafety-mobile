@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeScreen } from '../../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../../utils/runOcr';
@@ -19,11 +19,11 @@ export default function ScanLabelScreen() {
   const [permission, requestPermission] = useCameraPermissions();
   const [capturing, setCapturing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [cameraReady, setCameraReady] = useState(false);
   const cameraRef = useRef<CameraView>(null);
   const router = useRouter();
   // Guards async callbacks during the brief exit transition window.
   const focusedRef = useRef(true);
-  const isFocused = useIsFocused();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -32,6 +32,19 @@ export default function ScanLabelScreen() {
       setErrorMsg(null);
       return () => {
         focusedRef.current = false;
+      };
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const timeout = setTimeout(() => {
+        setCameraReady(true);
+      }, 80);
+
+      return () => {
+        clearTimeout(timeout);
+        setCameraReady(false);
       };
     }, [])
   );
@@ -136,8 +149,12 @@ export default function ScanLabelScreen() {
 
   return (
     <SafeScreen edges={['top']}>
-      {isFocused && (
-        <CameraView ref={cameraRef} style={StyleSheet.absoluteFill} facing="back" />
+      {cameraReady && (
+        <CameraView
+          ref={cameraRef}
+          style={StyleSheet.absoluteFill}
+          facing="back"
+        />
       )}
 
       {/* Top bar */}
