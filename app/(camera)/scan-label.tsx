@@ -14,6 +14,7 @@ import { SafeScreen } from '../../components/SafeScreen';
 import { BackButton } from '../../components/BackButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../../utils/runOcr';
+import type { OcrResult, OcrReason } from '../../utils/runOcr';
 import { API_BASE_URL } from '../../constants/api';
 import { EvaluateResponse, Profile } from '../../types';
 
@@ -81,12 +82,19 @@ export default function ScanLabelScreen() {
       }
 
       // 2. Run OCR
-      const text = await runOcr(photo.uri);
+      const ocr = await runOcr(photo.uri);
 
       if (!focusedRef.current) return;
 
-      if (!text) {
-        setErrorMsg('Label not readable. Try better lighting or move closer.');
+      if (ocr.reason !== 'success') {
+        const messages: Record<OcrReason, string> = {
+          no_text:        'Label not readable. Try better lighting or move closer.',
+          low_quality:    'Label not readable. Try better lighting or move closer.',
+          no_ingredients: 'No ingredient list found. Point the camera directly at the ingredients.',
+          non_latin:      'This label contains non-Latin text. Advanced analysis can interpret multilingual ingredient data.',
+          success:        '',
+        };
+        setErrorMsg(messages[ocr.reason] || 'Label not readable.');
         setCapturing(false);
         return;
       }
@@ -107,9 +115,11 @@ export default function ScanLabelScreen() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ingredient_text: text,
+          ingredient_text: ocr.text,
           product_name: 'Scanned label',
           profiles,
+          ocr_reason: ocr.reason,
+          ocr_confidence: ocr.confidence,
         }),
       });
 
