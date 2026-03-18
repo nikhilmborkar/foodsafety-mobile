@@ -34,7 +34,6 @@ export default function ScanScreen() {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const scanLocked = useRef(false);
-  const hasFocused = useRef(false);
   const router = useRouter();
   const { loading, slow, error, evaluate, reset } = useEvaluate();
   const insets = useSafeAreaInsets();
@@ -61,16 +60,6 @@ export default function ScanScreen() {
         cancelled = true;
       };
     }, [reset])
-  );
-
-  useFocusEffect(
-    useCallback(() => {
-      if (!hasFocused.current) {
-        hasFocused.current = true;
-        return;
-      }
-      setCameraKey((k) => k + 1);
-    }, [])
   );
 
   function navigateResult(result: EvaluateResponse | InconclusiveResult) {
