@@ -26,6 +26,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0F172A"
       },
+      "backgroundColor": "#F3E9DA",
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.CAMERA",
