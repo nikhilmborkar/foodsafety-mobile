@@ -28,12 +28,14 @@ export default function ScanScreen() {
   const [permission, requestPermission] = useCameraPermissions();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [cameraKey, setCameraKey] = useState(0);
+  const [cameraActive, setCameraActive] = useState(true);
   const [manualVisible, setManualVisible] = useState(false);
   const [manualBarcode, setManualBarcode] = useState('');
   const [scanMode, setScanMode] = useState<'grocery' | 'restaurant'>('grocery');
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const scanLocked = useRef(false);
+  const visitedScanLabel = useRef(false);
   const router = useRouter();
   const { loading, slow, error, evaluate, reset } = useEvaluate();
   const insets = useSafeAreaInsets();
@@ -68,12 +70,20 @@ export default function ScanScreen() {
   const prevPathname = useRef(pathname);
 
   useEffect(() => {
-    const wasOnScanLabel = prevPathname.current.includes('scan-label');
+    const onScanLabel = pathname.startsWith('/scan-label');
+    setCameraActive(!onScanLabel);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname.startsWith('/scan-label')) {
+      visitedScanLabel.current = true;
+    }
     prevPathname.current = pathname;
 
     if (pathname === '/') {
-      if (scanLocked.current || wasOnScanLabel) {
-        if (scanLocked.current) scanLocked.current = false;
+      if (scanLocked.current || visitedScanLabel.current) {
+        visitedScanLabel.current = false;
+        scanLocked.current = false;
         setCameraKey((k) => k + 1);
       }
     }
@@ -149,15 +159,17 @@ export default function ScanScreen() {
   return (
     <SafeScreen edges={['top']}>
       <View style={styles.container}>
-      <CameraView
-        key={cameraKey}
-        style={StyleSheet.absoluteFill}
-        facing="back"
-        barcodeScannerSettings={{
-          barcodeTypes: ['ean13', 'ean8', 'upc_a', 'upc_e', 'code128'],
-        }}
-        onBarcodeScanned={handleBarcode}
-      />
+      {cameraActive && (
+        <CameraView
+          key={cameraKey}
+          style={StyleSheet.absoluteFill}
+          facing="back"
+          barcodeScannerSettings={{
+            barcodeTypes: ['ean13', 'ean8', 'upc_a', 'upc_e', 'code128'],
+          }}
+          onBarcodeScanned={handleBarcode}
+        />
+      )}
 
       {/* Overlay */}
       <View style={styles.overlay}>
