@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { SafeScreen } from '../../components/SafeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../../utils/runOcr';
@@ -23,6 +23,7 @@ export default function ScanLabelScreen() {
   const router = useRouter();
   // Guards async callbacks during the brief exit transition window.
   const focusedRef = useRef(true);
+  const isFocused = useIsFocused();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -135,7 +136,9 @@ export default function ScanLabelScreen() {
 
   return (
     <SafeScreen edges={['top']}>
-      <CameraView ref={cameraRef} style={StyleSheet.absoluteFill} facing="back" />
+      {isFocused && (
+        <CameraView ref={cameraRef} style={StyleSheet.absoluteFill} facing="back" />
+      )}
 
       {/* Top bar */}
       <View style={styles.topBar}>
