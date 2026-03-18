@@ -16,6 +16,7 @@ import { COLOURS } from '../../constants/colours';
 import { TYPOGRAPHY } from '../../constants/typography';
 import { SafeScreen } from '../../components/SafeScreen';
 import { WarningIcon } from '../../components/icons';
+import { BackButton } from '../../components/BackButton';
 
 type ResultParams = {
   data?: string;
@@ -64,9 +65,7 @@ export default function ResultScreen() {
         <ScrollView contentContainerStyle={styles.incContent}>
           {/* Header row */}
           <View style={styles.incHeaderRow}>
-            <TouchableOpacity style={styles.incBackBtn} onPress={() => router.replace('/')}>
-              <Text style={styles.incBackChevron}>‹</Text>
-            </TouchableOpacity>
+            <BackButton variant="light" onPress={() => router.replace('/')} />
             <Text style={styles.incBackLabel}>Back to scanner</Text>
           </View>
 
@@ -315,25 +314,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  incBackBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#A3B18A',
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  incBackChevron: {
-    fontSize: 18,
-    color: '#0F172A',
-  },
   incBackLabel: {
     fontFamily: 'Inter_400Regular',
     fontSize: 13,
     color: '#64748B',
-    marginLeft: 8,
+    marginLeft: 0,
   },
   incProductName: {
     fontFamily: 'Fraunces_600SemiBold',

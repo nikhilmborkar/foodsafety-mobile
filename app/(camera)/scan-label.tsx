@@ -11,6 +11,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeScreen } from '../../components/SafeScreen';
+import { BackButton } from '../../components/BackButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runOcr } from '../../utils/runOcr';
 import { API_BASE_URL } from '../../constants/api';
@@ -181,11 +182,9 @@ export default function ScanLabelScreen() {
 
       {/* Top bar */}
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Text style={styles.backText}>←</Text>
-        </TouchableOpacity>
+        <BackButton variant="dark" onPress={() => router.back()} />
         <Text style={styles.title}>Point camera at ingredient label</Text>
-        <View style={styles.backBtn} />
+        <View style={styles.spacer} />
       </View>
 
       {/* Error message */}
@@ -230,13 +229,8 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     backgroundColor: 'rgba(0,0,0,0.55)',
   },
-  backBtn: {
-    width: 36,
-    alignItems: 'center',
-  },
-  backText: {
-    fontSize: 22,
-    color: '#F3E9DA',
+  spacer: {
+    width: 40,
   },
   title: {
     fontFamily: 'Inter_500Medium',

@@ -14,6 +14,7 @@ import { mapToMemberResults } from '../../lib/mapToMemberResults';
 import { VerdictCard } from '../../components/VerdictCard';
 import { SafeScreen } from '../../components/SafeScreen';
 import { WarningIcon } from '../../components/icons';
+import { BackButton } from '../../components/BackButton';
 
 type Params = {
   data?: string;
@@ -78,9 +79,7 @@ export default function ResultTier1Screen() {
           <>
             {/* Header */}
             <View style={styles.header}>
-              <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/')}>
-                <Text style={styles.backChevron}>‹</Text>
-              </TouchableOpacity>
+              <BackButton variant="light" onPress={() => router.replace('/')} />
               <View style={styles.headerText}>
                 <Text style={styles.productName} numberOfLines={2}>{productName}</Text>
                 {productId ? (
@@ -155,23 +154,8 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 16,
-  },
-  backBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#A3B18A',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
-    marginTop: 2,
-  },
-  backChevron: {
-    fontSize: 18,
-    color: '#0F172A',
+    marginBottom: 16,
   },
   headerText: {
     flex: 1,
