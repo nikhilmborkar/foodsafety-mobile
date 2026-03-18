@@ -49,7 +49,7 @@ export default function ProfilesScreen() {
   return (
     <SafeScreen edges={['top']} style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={[styles.header, { paddingTop: 12 }]}>
+        <View style={styles.header}>
           <Text style={styles.wordmark}>fufu</Text>
           <TouchableOpacity
             style={styles.addBtn}
@@ -94,12 +94,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.BACKGROUND,
   },
   content: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingTop: 16,
     marginBottom: 16,
   },
   wordmark: {
