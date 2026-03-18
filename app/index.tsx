@@ -80,11 +80,11 @@ export default function ScanScreen() {
     }
 
     if (pathname === '/') {
-      if (scanLocked.current || visitedScanLabel.current) {
-        visitedScanLabel.current = false;
+      if (scanLocked.current) {
         scanLocked.current = false;
         setCameraKey((k) => k + 1);
       }
+      visitedScanLabel.current = false;
     }
   }, [pathname]);
 
