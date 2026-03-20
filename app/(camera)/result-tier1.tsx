@@ -113,11 +113,11 @@ export default function ResultTier1Screen() {
           <VerdictCard
             member={item}
             onPress={
-              item.verdict === 'WARN'
+              item.verdict === 'WARN' || item.verdict === 'BLOCK'
                 ? () =>
                     router.push({
-                      pathname: '/result',
-                      params: { data, source },
+                      pathname: '/result-tier2',
+                      params: { data, source, scrollToMemberId: item.memberId },
                     })
                 : undefined
             }
@@ -131,7 +131,7 @@ export default function ResultTier1Screen() {
 
             <TouchableOpacity
               style={styles.fullResultsBtn}
-              onPress={() => router.push({ pathname: '/result', params: { data, source } })}
+              onPress={() => router.push({ pathname: '/result-tier2', params: { data, source } })}
             >
               <Text style={styles.fullResultsText}>View full results</Text>
             </TouchableOpacity>
