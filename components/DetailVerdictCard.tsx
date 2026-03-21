@@ -236,34 +236,39 @@ function glutenExplanation(
     : `May contain ${grainList} (precautionary label).`;
 }
 
-function buildExplanations(evaluation: EvaluationOutput): string[] {
+type ExplanationItem =
+  | { type: "signal"; text: string }
+  | { type: "rule"; text: string };
+
+function buildExplanations(evaluation: EvaluationOutput): ExplanationItem[] {
   const signals = evaluation.Matched_Signals ?? [];
   const ruleIds = evaluation.Matched_Rule_IDs ?? [];
   const glutenSources = evaluation.Allergen_Source_Details?.gluten_cereals;
-  const seen = new Set<string>();
-  const results: string[] = [];
 
-  function push(text: string): void {
+  const seen = new Set<string>();
+  const results: ExplanationItem[] = [];
+
+  function push(type: "signal" | "rule", text: string): void {
     if (!seen.has(text)) {
       seen.add(text);
-      results.push(text);
+      results.push({ type, text });
     }
   }
 
+  // Pass 1 — signals (WHAT)
   for (const signal of signals) {
     if (signal === 'gluten_cereals.contains' || signal === 'gluten_cereals.may_contain') {
-      push(glutenExplanation(signal, glutenSources));
+      push("signal", glutenExplanation(signal, glutenSources));
     } else {
       const text = SIGNAL_EXPLANATIONS[signal];
-      if (text) push(text);
+      if (text) push("signal", text);
     }
   }
 
-  if (results.length === 0) {
-    for (const id of ruleIds) {
-      const text = RULE_EXPLANATIONS[id];
-      if (text) push(text);
-    }
+  // Pass 2 — rules (WHY)
+  for (const id of ruleIds) {
+    const text = RULE_EXPLANATIONS[id];
+    if (text) push("rule", text);
   }
 
   return results;
@@ -355,9 +360,27 @@ function DetailVerdictCardInner({ member, evaluation, isWarn, scanLogId }: Props
       <Text style={styles.sectionLabel}>DECISION</Text>
 
       {explanations.length > 0 ? (
-        explanations.map((text, i) => (
-          <Text key={i} style={styles.ruleItem}>{'• '}{text}</Text>
-        ))
+        <>
+          {explanations
+            .filter(item => item.type === "signal")
+            .map((item, i) => (
+              <View key={`signal-${i}`} style={styles.ruleItemWrapper}>
+                <Text style={styles.ruleItem}>{'• '}{item.text}</Text>
+              </View>
+            ))}
+
+          {explanations.some(item => item.type === "rule") && (
+            <Text style={styles.ruleWhyHeader}>Why this matters</Text>
+          )}
+
+          {explanations
+            .filter(item => item.type === "rule")
+            .map((item, i) => (
+              <Text key={`rule-${i}`} style={styles.ruleSubItem}>
+                {item.text}
+              </Text>
+            ))}
+        </>
       ) : signals.length === 0 && evaluation.Outcome === 'ALLOW' ? (
         <Text style={styles.ruleItem}>
           No known conflicts detected for this profile based on available data.
@@ -504,6 +527,24 @@ const styles = StyleSheet.create({
     color: COLOURS.TEXT_MID,
     lineHeight: 19,
     marginBottom: 3,
+  },
+  ruleItemWrapper: {
+    marginBottom: 4,
+  },
+  ruleWhyHeader: {
+    ...TYPOGRAPHY.body,
+    fontWeight: '600',
+    marginTop: 6,
+    marginBottom: 2,
+    color: COLOURS.TEXT_SECONDARY,
+  },
+  ruleSubItem: {
+    ...TYPOGRAPHY.body,
+    fontSize: 12,
+    color: COLOURS.TEXT_SECONDARY,
+    marginLeft: 14,
+    marginTop: 2,
+    lineHeight: 16,
   },
   confidenceSection: {
     borderTopWidth: 1,
