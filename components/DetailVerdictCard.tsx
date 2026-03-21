@@ -369,9 +369,25 @@ function DetailVerdictCardInner({ member, evaluation, isWarn, scanLogId }: Props
               </View>
             ))}
 
-          {explanations.some(item => item.type === "rule") && (
-            <Text style={styles.ruleWhyHeader}>Why this matters</Text>
-          )}
+          {explanations.some(item => item.type === "rule") && (() => {
+            const signalCount = explanations.filter(item => item.type === "signal").length;
+
+            const dynamicMarginTop =
+              signalCount === 0 ? 0 :
+              signalCount === 1 ? 4 :
+              8;
+
+            return (
+              <Text
+                style={[
+                  styles.ruleWhyHeader,
+                  { marginTop: dynamicMarginTop },
+                ]}
+              >
+                Why this matters
+              </Text>
+            );
+          })()}
 
           {explanations
             .filter(item => item.type === "rule")
