@@ -41,7 +41,7 @@ const LIFE_STAGE_NOTES: Partial<Record<Profile['Age_Group'], string>> = {
 const PET_SPECIES: Array<'Dog' | 'Cat'> = ['Dog', 'Cat'];
 const SENSITIVITY: Profile['Sensitivity_Level'][] = ['Normal', 'Strict'];
 const DIET_OPTIONS = ['None', 'Vegan', 'Vegetarian', 'Pescatarian'];
-const FAITH_OPTIONS = ['None', 'Halal', 'Kosher', 'Hindu'];
+const FAITH_OPTIONS = ['None', 'Halal', 'Kosher', 'Hindu', 'Jain'];
 
 export function ProfileForm({ initial, onSave, onCancel }: Props) {
   const insets = useSafeAreaInsets();
